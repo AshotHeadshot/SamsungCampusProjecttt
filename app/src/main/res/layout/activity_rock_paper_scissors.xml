@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="24dp"
+    android:background="@color/ga_bg_dark">
+
+    <TextView
+        android:id="@+id/statusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose Rock, Paper, or Scissors"
+        android:textSize="20sp"
+        android:textColor="@color/ga_neon_blue"
+        android:layout_marginBottom="16dp"
+        style="@style/GameArenaHeading"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <Button
+            android:id="@+id/rockBtn"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:text="Rock"
+            style="@style/GameArenaButton"
+            android:layout_margin="8dp"/>
+        <Button
+            android:id="@+id/paperBtn"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:text="Paper"
+            style="@style/GameArenaButton"
+            android:layout_margin="8dp"/>
+        <Button
+            android:id="@+id/scissorsBtn"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:text="Scissors"
+            style="@style/GameArenaButton"
+            android:layout_margin="8dp"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/resultText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@color/ga_text_secondary"
+        android:layout_marginTop="24dp"
+        android:gravity="center"/>
+
+    <Button
+        android:id="@+id/playAgainBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Play Again"
+        style="@style/GameArenaButton"
+        android:layout_marginTop="24dp"
+        android:visibility="gone"/>
+
+</LinearLayout>

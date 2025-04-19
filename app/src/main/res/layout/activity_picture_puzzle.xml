@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp"
+    android:background="@color/ga_bg_dark"
+    tools:context=".PicturePuzzleActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Photo Puzzle Game"
+        android:textSize="24sp"
+        android:textAlignment="center"
+        android:textColor="@color/ga_neon_blue"
+        android:layout_marginBottom="16dp"
+        style="@style/GameArenaHeading"/>
+
+    <RadioGroup
+        android:id="@+id/difficulty_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
+
+        <RadioButton
+            android:id="@+id/radio_easy"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Easy (3x3)"
+            android:checked="true"
+            style="@style/GameArenaButton"/>
+
+        <RadioButton
+            android:id="@+id/radio_medium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Medium (4x4)"
+            style="@style/GameArenaButton"/>
+
+        <RadioButton
+            android:id="@+id/radio_hard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Hard (5x5)"
+            style="@style/GameArenaButton"/>
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
+
+        <Button
+            android:id="@+id/btn_take_photo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Take Photo"
+            android:layout_marginEnd="8dp"
+            style="@style/GameArenaButton"/>
+
+        <Button
+            android:id="@+id/btn_select_photo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Select Photo"
+            style="@style/GameArenaButton"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_shuffle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Shuffle Puzzle"
+        android:layout_marginBottom="16dp"
+        style="@style/GameArenaButton"/>
+
+    <GridLayout
+        android:id="@+id/puzzle_grid"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/ga_card_bg"
+        android:padding="8dp"/>
+
+</LinearLayout>

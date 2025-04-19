@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="blue">#2196F3</color>
+    <!-- Game Arena Neon Theme Colors -->
+    <color name="ga_bg_dark">#0a1026</color>
+    <color name="ga_neon_blue">#0099ff</color>
+    <color name="ga_neon_orange">#ff5e13</color>
+    <color name="ga_text_primary">#FFFFFF</color>
+    <color name="ga_text_secondary">#B0B9C8</color>
+    <color name="ga_button_bg">#131c36</color>
+    <color name="ga_button_border">#0099ff</color>
+    <color name="ga_button_pressed">#ff5e13</color>
+    <color name="ga_card_bg">#141c2f</color>
+    <color name="ga_shadow">#222b44</color>
+    <color name="ga_primary">#1976D2</color>
+</resources>

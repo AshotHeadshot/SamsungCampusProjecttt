@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/ga_bg_dark"
+    tools:context=".Game2048Activity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="2048"
+        android:textSize="48sp"
+        android:textColor="@color/ga_neon_blue"
+        android:textStyle="bold"
+        android:gravity="center"
+        style="@style/GameArenaHeading"/>
+
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Score: 0"
+        android:textSize="24sp"
+        android:textColor="@color/ga_text_secondary"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"/>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:rowCount="4"
+        android:columnCount="4"
+        android:background="@color/ga_card_bg"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/cell00"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="4dp"
+            android:gravity="center"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:background="@color/ga_bg_dark"
+            android:textColor="@color/ga_text_primary"/>
+
+        <TextView
+            android:id="@+id/cell01"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="4dp"
+            android:gravity="center"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:background="@color/ga_bg_dark"
+            android:textColor="@color/ga_text_primary"/>
+
+        <TextView
+            android:id="@+id/cell02"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="4dp"
+            android:gravity="center"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:background="@color/ga_bg_dark"
+            android:textColor="@color/ga_text_primary"/>
+
+        <TextView
+            android:id="@+id/cell03"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="4dp"
+            android:gravity="center"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:background="@color/ga_bg_dark"
+            android:textColor="@color/ga_text_primary"/>
+
+        <TextView
+            android:id="@+id/cell10"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="4dp"
+            android:gravity="center"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:background="@color/ga_bg_dark"
+            android:textColor="@color/ga_text_primary"/>
+
+        <TextView
+            android:id="@+id/cell11"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="4dp"
+            android:gravity="center"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:background="@color/ga_bg_dark"
+            android:textColor="@color/ga_text_primary"/>
+
+        <TextView
+            android:id="@+id/cell12"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="4dp"
+            android:gravity="center"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:background="@color/ga_bg_dark"
+            android:textColor="@color/ga_text_primary"/>
+
+        <TextView
+            android:id="@+id/cell13"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="4dp"
+            android:gravity="center"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:background="@color/ga_bg_dark"
+            android:textColor="@color/ga_text_primary"/>
+
+        <TextView
+            android:id="@+id/cell20"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="4dp"
+            android:gravity="center"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:background="@color/ga_bg_dark"
+            android:textColor="@color/ga_text_primary"/>
+
+        <TextView
+            android:id="@+id/cell21"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="4dp"
+            android:gravity="center"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:background="@color/ga_bg_dark"
+            android:textColor="@color/ga_text_primary"/>
+
+        <TextView
+            android:id="@+id/cell22"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="4dp"
+            android:gravity="center"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:background="@color/ga_bg_dark"
+            android:textColor="@color/ga_text_primary"/>
+
+        <TextView
+            android:id="@+id/cell23"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="4dp"
+            android:gravity="center"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:background="@color/ga_bg_dark"
+            android:textColor="@color/ga_text_primary"/>
+
+        <TextView
+            android:id="@+id/cell30"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="4dp"
+            android:gravity="center"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:background="@color/ga_bg_dark"
+            android:textColor="@color/ga_text_primary"/>
+
+        <TextView
+            android:id="@+id/cell31"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="4dp"
+            android:gravity="center"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:background="@color/ga_bg_dark"
+            android:textColor="@color/ga_text_primary"/>
+
+        <TextView
+            android:id="@+id/cell32"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="4dp"
+            android:gravity="center"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:background="@color/ga_bg_dark"
+            android:textColor="@color/ga_text_primary"/>
+
+        <TextView
+            android:id="@+id/cell33"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="4dp"
+            android:gravity="center"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:background="@color/ga_bg_dark"
+            android:textColor="@color/ga_text_primary"/>
+    </GridLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Game"
+        style="@style/GameArenaButton"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:onClick="onNewGameClick"/>
+
+</LinearLayout>

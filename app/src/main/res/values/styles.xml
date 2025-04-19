@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@color/ga_bg_dark</item>
+        <item name="android:colorBackground">@color/ga_bg_dark</item>
+        <item name="android:textColor">@color/ga_text_primary</item>
+        <item name="android:buttonStyle">@style/GameArenaButton</item>
+        <item name="android:editTextBackground">@color/ga_card_bg</item>
+    </style>
+
+    <!-- Neon Button Style -->
+    <style name="GameArenaButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/ga_button_bg</item>
+        <item name="android:textColor">@color/ga_text_primary</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:elevation">4dp</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
+    <!-- Headings -->
+    <style name="GameArenaHeading" parent="TextAppearance.AppCompat.Large">
+        <item name="android:textColor">@color/ga_text_primary</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:shadowColor">@color/ga_neon_blue</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">0</item>
+        <item name="android:shadowRadius">4</item>
+    </style>
+
+    <!-- Card Style -->
+    <style name="GameArenaCard">
+        <item name="android:background">@color/ga_card_bg</item>
+        <item name="android:elevation">6dp</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:layout_margin">8dp</item>
+        <item name="android:backgroundTint">@color/ga_card_bg</item>
+    </style>
+</resources>

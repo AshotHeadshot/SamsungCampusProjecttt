@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="24dp"
+    android:background="@color/ga_bg_dark">
+
+    <TextView
+        android:id="@+id/statusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your turn"
+        android:textSize="18sp"
+        android:textColor="@color/ga_neon_blue"
+        android:layout_marginBottom="16dp"
+        style="@style/GameArenaHeading"/>
+
+    <GridLayout
+        android:id="@+id/ticGrid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rowCount="3"
+        android:columnCount="3"
+        android:layout_gravity="center"
+        android:background="@color/ga_card_bg"
+        android:padding="8dp">
+
+        <Button android:layout_width="60dp" android:layout_height="60dp" android:textSize="24sp" style="@style/GameArenaButton"/>
+        <Button android:layout_width="60dp" android:layout_height="60dp" android:textSize="24sp" style="@style/GameArenaButton"/>
+        <Button android:layout_width="60dp" android:layout_height="60dp" android:textSize="24sp" style="@style/GameArenaButton"/>
+        <Button android:layout_width="60dp" android:layout_height="60dp" android:textSize="24sp" style="@style/GameArenaButton"/>
+        <Button android:layout_width="60dp" android:layout_height="60dp" android:textSize="24sp" style="@style/GameArenaButton"/>
+        <Button android:layout_width="60dp" android:layout_height="60dp" android:textSize="24sp" style="@style/GameArenaButton"/>
+        <Button android:layout_width="60dp" android:layout_height="60dp" android:textSize="24sp" style="@style/GameArenaButton"/>
+        <Button android:layout_width="60dp" android:layout_height="60dp" android:textSize="24sp" style="@style/GameArenaButton"/>
+        <Button android:layout_width="60dp" android:layout_height="60dp" android:textSize="24sp" style="@style/GameArenaButton"/>
+    </GridLayout>
+
+    <Button
+        android:id="@+id/resetBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Play Again"
+        android:layout_marginTop="16dp"
+        android:visibility="gone"
+        android:onClick="onReset"
+        style="@style/GameArenaButton"/>
+
+</LinearLayout>

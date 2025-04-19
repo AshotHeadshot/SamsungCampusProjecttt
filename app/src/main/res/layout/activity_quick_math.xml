@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="24dp"
+    android:background="@color/ga_bg_dark">
+
+    <TextView
+        android:id="@+id/progressText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Question 1/10"
+        android:textSize="18sp"
+        android:layout_marginBottom="12dp"
+        android:textColor="@color/ga_neon_blue"
+        style="@style/GameArenaHeading"/>
+
+    <TextView
+        android:id="@+id/questionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="What is 2 + 3?"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/ga_neon_blue"
+        android:layout_marginBottom="16dp"
+        style="@style/GameArenaHeading"/>
+
+    <EditText
+        android:id="@+id/answerInput"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:hint="Your answer"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:background="@color/ga_card_bg"
+        android:textColor="@color/ga_text_primary"
+        android:padding="12dp"
+        android:layout_marginBottom="12dp"/>
+
+    <Button
+        android:id="@+id/submitBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        style="@style/GameArenaButton"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/feedbackText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@color/ga_text_secondary"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/scoreText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Score: 0"
+        android:textSize="18sp"
+        android:layout_marginBottom="12dp"
+        android:textColor="@color/ga_text_primary"/>
+
+    <Button
+        android:id="@+id/finishBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Finish"
+        style="@style/GameArenaButton"
+        android:visibility="gone"/>
+
+</LinearLayout>

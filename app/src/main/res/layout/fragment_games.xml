@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ga_bg_dark"
+    android:padding="24dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ranked Games"
+            style="@style/GameArenaHeading"
+            android:layout_marginBottom="8dp"/>
+
+        <ImageButton
+            android:id="@+id/rockPaperScissorsBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/rock_paper_scissors_vs_bot"
+            android:background="@android:color/transparent"
+            android:contentDescription="Rock-Paper-Scissors vs Bot"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:layout_marginBottom="8dp"/>
+
+        <ImageButton
+            android:id="@+id/quickMathBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/quick_math_challenge_logo"
+            android:background="@android:color/transparent"
+            android:contentDescription="Quick Math Challenge"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:layout_marginBottom="8dp"/>
+
+        <ImageButton
+            android:id="@+id/snakeBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/snake_logo"
+            android:background="@android:color/transparent"
+            android:contentDescription="Snake"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:layout_marginBottom="8dp"/>
+
+        <ImageButton
+            android:id="@+id/game2048Btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/game_2048_logo"
+            android:background="@android:color/transparent"
+            android:contentDescription="2048"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Removed Sudoku button -->
+
+        <ImageButton
+            android:id="@+id/ticTacToeBotBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/tictactoe_vs_bot_logo"
+            android:background="@android:color/transparent"
+            android:contentDescription="TicTacToe vs Bot"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Unranked Games"
+            style="@style/GameArenaHeading"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp"/>
+
+        <ImageButton
+            android:id="@+id/ticTacToeBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/tictactoe_pvp_logo"
+            android:background="@android:color/transparent"
+            android:contentDescription="TicTacToe (Player vs Player)"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:layout_marginBottom="12dp"/>
+
+        <ImageButton
+            android:id="@+id/aliasBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/alias_logo"
+            android:background="@android:color/transparent"
+            android:contentDescription="Alias"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:layout_marginBottom="12dp"/>
+
+    </LinearLayout>
+</ScrollView>

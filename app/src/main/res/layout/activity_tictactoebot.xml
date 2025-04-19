@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center_horizontal"
+    android:background="@color/ga_bg_dark">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:id="@+id/text_view_p1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Player: 0"
+            android:textSize="20sp"
+            android:textColor="@color/ga_text_primary"
+            android:layout_marginEnd="32dp"/>
+
+        <TextView
+            android:id="@+id/text_view_p2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AI: 0"
+            android:textSize="20sp"
+            android:textColor="@color/ga_text_primary"/>
+    </LinearLayout>
+
+    <GridLayout
+        android:id="@+id/ticGridBot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rowCount="3"
+        android:columnCount="3"
+        android:layout_gravity="center"
+        android:background="@color/ga_card_bg"
+        android:padding="8dp">
+
+        <Button android:id="@+id/button_00" android:layout_width="64dp" android:layout_height="64dp" android:textSize="28sp" />
+        <Button android:id="@+id/button_01" android:layout_width="64dp" android:layout_height="64dp" android:textSize="28sp" />
+        <Button android:id="@+id/button_02" android:layout_width="64dp" android:layout_height="64dp" android:textSize="28sp" />
+        <Button android:id="@+id/button_10" android:layout_width="64dp" android:layout_height="64dp" android:textSize="28sp" />
+        <Button android:id="@+id/button_11" android:layout_width="64dp" android:layout_height="64dp" android:textSize="28sp" />
+        <Button android:id="@+id/button_12" android:layout_width="64dp" android:layout_height="64dp" android:textSize="28sp" />
+        <Button android:id="@+id/button_20" android:layout_width="64dp" android:layout_height="64dp" android:textSize="28sp" />
+        <Button android:id="@+id/button_21" android:layout_width="64dp" android:layout_height="64dp" android:textSize="28sp" />
+        <Button android:id="@+id/button_22" android:layout_width="64dp" android:layout_height="64dp" android:textSize="28sp" />
+    </GridLayout>
+
+    <Button
+        android:id="@+id/button_reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reset"
+        android:layout_marginTop="24dp"
+        style="@style/GameArenaButton"/>
+
+</LinearLayout>
