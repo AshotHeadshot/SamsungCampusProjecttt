@@ -112,6 +112,9 @@ public class TicTacToeBotActivity extends AppCompatActivity implements View.OnCl
         player1Points++;
         Toast.makeText(this, "Player wins!", Toast.LENGTH_SHORT).show();
         updatePointsText();
+        PointManager.getInstance().updateTicTacToeResult(this, "win");
+        PointManager.getInstance().syncPoints(this);
+        PointManager.getInstance().loadPoints(this);
         gameActive = false;
     }
 
@@ -119,11 +122,17 @@ public class TicTacToeBotActivity extends AppCompatActivity implements View.OnCl
         player2Points++;
         Toast.makeText(this, "AI wins!", Toast.LENGTH_SHORT).show();
         updatePointsText();
+        PointManager.getInstance().updateTicTacToeResult(this, "lose");
+        PointManager.getInstance().syncPoints(this);
+        PointManager.getInstance().loadPoints(this);
         gameActive = false;
     }
 
     private void draw() {
         Toast.makeText(this, "Draw!", Toast.LENGTH_SHORT).show();
+        PointManager.getInstance().updateTicTacToeResult(this, "draw");
+        PointManager.getInstance().syncPoints(this);
+        PointManager.getInstance().loadPoints(this);
         gameActive = false;
     }
 

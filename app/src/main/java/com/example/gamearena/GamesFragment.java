@@ -21,6 +21,7 @@ public class GamesFragment extends Fragment {
         ticTacToeBtn.setOnClickListener(v -> {
             try {
                 Intent intent = new Intent(getActivity(), TicTacToeActivity.class);
+                intent.putExtra("EXTRA_PVP_MODE", true); // Enable PvP mode
                 startActivity(intent);
             } catch (Exception e) {
                 Toast.makeText(getActivity(), "Could not open TicTacToe: " + e.getMessage(), Toast.LENGTH_LONG).show();

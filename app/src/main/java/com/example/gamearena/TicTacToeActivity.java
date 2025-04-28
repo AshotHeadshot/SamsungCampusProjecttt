@@ -17,11 +17,13 @@ public class TicTacToeActivity extends AppCompatActivity {
     private boolean xTurn = true;
     private int moves = 0;
     private TextView statusText;
+    private boolean pvpMode = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tictactoe);
+        pvpMode = getIntent().getBooleanExtra("EXTRA_PVP_MODE", false);
         statusText = findViewById(R.id.statusText);
         GridLayout grid = findViewById(R.id.ticGrid);
         for (int i = 0; i < 3; i++) {
@@ -57,8 +59,8 @@ public class TicTacToeActivity extends AppCompatActivity {
             xTurn = !xTurn;
             statusText.setText((xTurn ? "X" : "O") + "'s turn");
         }
-        // Bot move if it's O's turn
-        if (!xTurn) {
+        // Bot move if it's O's turn and NOT in PvP mode
+        if (!xTurn && !pvpMode) {
             botMove();
         }
     }
@@ -122,25 +124,26 @@ public class TicTacToeActivity extends AppCompatActivity {
             outcome = "lose";
         }
         Toast.makeText(this, "Outcome for points: " + outcome, Toast.LENGTH_SHORT).show();
-        PointManager.getInstance().updateTicTacToeResult(this, outcome);
-        // --- Update stats and achievements ---
-        SharedPreferences prefs = getSharedPreferences("user_prefs", MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        if (outcome.equals("win")) {
-            int wins = prefs.getInt("tictactoe_wins", 0) + 1;
-            editor.putInt("tictactoe_wins", wins);
-            if (!prefs.getBoolean("ach_first_win", false)) {
-                editor.putBoolean("ach_first_win", true);
+        // Only update points and stats if NOT in PvP mode (i.e., vs Bot only)
+        if (!pvpMode) {
+            SharedPreferences prefs = getSharedPreferences("user_prefs", MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            if (outcome.equals("win")) {
+                int wins = prefs.getInt("tictactoe_wins", 0) + 1;
+                editor.putInt("tictactoe_wins", wins);
+                if (!prefs.getBoolean("ach_first_win", false)) {
+                    editor.putBoolean("ach_first_win", true);
+                }
+            } else if (outcome.equals("lose")) {
+                int losses = prefs.getInt("tictactoe_losses", 0) + 1;
+                editor.putInt("tictactoe_losses", losses);
+            } else if (outcome.equals("draw")) {
+                int draws = prefs.getInt("tictactoe_draws", 0) + 1;
+                editor.putInt("tictactoe_draws", draws);
             }
-        } else if (outcome.equals("lose")) {
-            int losses = prefs.getInt("tictactoe_losses", 0) + 1;
-            editor.putInt("tictactoe_losses", losses);
-        } else if (outcome.equals("draw")) {
-            int draws = prefs.getInt("tictactoe_draws", 0) + 1;
-            editor.putInt("tictactoe_draws", draws);
+            editor.apply();
+            updatePointsUIAndSync();
         }
-        editor.apply();
-        updatePointsUIAndSync();
         statusText.setText(result);
         for (int i = 0; i < 3; i++)
             for (int j = 0; j < 3; j++)
