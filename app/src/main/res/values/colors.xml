@@ -15,4 +15,9 @@
     <color name="ga_card_bg">#141c2f</color>
     <color name="ga_shadow">#222b44</color>
     <color name="ga_primary">#1976D2</color>
+    <color name="ga_blue">#1976D2</color>
+    <color name="ga_orange">#FF9800</color>
+    <color name="ga_green">#43A047</color>
+    <color name="ga_purple">#8E24AA</color>
+    <color name="ga_red">#E53935</color>
 </resources>

@@ -53,6 +53,72 @@ public class GamesFragment extends Fragment {
         game2048Btn.setOnClickListener(v -> startActivity(new Intent(getActivity(), Game2048Activity.class)));
         ImageButton aliasBtn = view.findViewById(R.id.aliasBtn);
         aliasBtn.setOnClickListener(v -> startActivity(new Intent(getActivity(), AliasActivity.class)));
+        
+        ImageButton towerBlockBtn = view.findViewById(R.id.TowerBlockBtn);
+        towerBlockBtn.setOnClickListener(v -> {
+            Toast.makeText(getActivity(), "Tower Block Clicked", Toast.LENGTH_SHORT).show();
+            try {
+                Intent intent = new Intent(getActivity(), TowerBlockActivity.class);
+                startActivity(intent);
+            } catch (Exception e) {
+                Toast.makeText(getActivity(), "Could not open Tower Block: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+        
+        ImageButton imposterColorBtn = view.findViewById(R.id.ImposterColorBtn);
+        imposterColorBtn.setOnClickListener(v -> {
+            Toast.makeText(getActivity(), "Imposter Color Clicked", Toast.LENGTH_SHORT).show();
+            try {
+                Intent intent = new Intent(getActivity(), ImposterColorActivity.class);
+                startActivity(intent);
+            } catch (Exception e) {
+                Toast.makeText(getActivity(), "Could not open Imposter Color: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        ImageButton wordScrambleBtn = view.findViewById(R.id.wordScrambleBtn);
+        wordScrambleBtn.setOnClickListener(v -> {
+            Toast.makeText(getActivity(), "Word Scramble Clicked", Toast.LENGTH_SHORT).show();
+            try {
+                Intent intent = new Intent(getActivity(), WordScrambleActivity.class);
+                startActivity(intent);
+            } catch (Exception e) {
+                Toast.makeText(getActivity(), "Could not open Word Scramble: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+        
+        ImageButton fastTypingBtn = view.findViewById(R.id.fasttypingBtn);
+        fastTypingBtn.setOnClickListener(v -> {
+            Toast.makeText(getActivity(), "Fast Typing Challenge Clicked", Toast.LENGTH_SHORT).show();
+            try {
+                Intent intent = new Intent(getActivity(), FastTypingActivity.class);
+                startActivity(intent);
+            } catch (Exception e) {
+                Toast.makeText(getActivity(), "Could not open Fast Typing Challenge: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        ImageButton pingPongUserBtn = view.findViewById(R.id.PingPong);
+        pingPongUserBtn.setOnClickListener(v -> {
+            Toast.makeText(getActivity(), "Ping Pong User vs User Clicked", Toast.LENGTH_SHORT).show();
+            try {
+                Intent intent = new Intent(getActivity(), PingPongUserVsUserActivity.class);
+                startActivity(intent);
+            } catch (Exception e) {
+                Toast.makeText(getActivity(), "Could not open Ping Pong User vs User: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        ImageButton pingPongVsBlocksBtn = view.findViewById(R.id.PingPongvsBlocksBtn);
+        pingPongVsBlocksBtn.setOnClickListener(v -> {
+    Toast.makeText(getActivity(), "Ping Pong vs Blocks Clicked", Toast.LENGTH_SHORT).show();
+    try {
+        Intent intent = new Intent(getActivity(), PingPongVsBlocksActivity.class);
+        startActivity(intent);
+    } catch (Exception e) {
+        Toast.makeText(getActivity(), "Could not open Ping Pong vs Blocks: " + e.getMessage(), Toast.LENGTH_LONG).show();
+    }
+});
 
         return view;
     }

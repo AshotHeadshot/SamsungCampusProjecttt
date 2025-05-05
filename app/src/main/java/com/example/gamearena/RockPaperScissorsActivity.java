@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.Random;
@@ -13,7 +14,9 @@ import com.example.gamearena.PointManager;
 public class RockPaperScissorsActivity extends AppCompatActivity {
     private Button rockBtn, paperBtn, scissorsBtn, playAgainBtn;
     private TextView statusText, resultText;
+    private ImageView playerHand, computerHand;
     private String[] choices = {"Rock", "Paper", "Scissors"};
+    private int[] handDrawables = {R.drawable.ic_hand_rock, R.drawable.ic_hand_paper, R.drawable.ic_hand_scissors};
     private Random random = new Random();
     private int userChoice = -1;
     private int botChoice = -1;
@@ -28,6 +31,8 @@ public class RockPaperScissorsActivity extends AppCompatActivity {
         paperBtn = findViewById(R.id.paperBtn);
         scissorsBtn = findViewById(R.id.scissorsBtn);
         playAgainBtn = findViewById(R.id.playAgainBtn);
+        playerHand = findViewById(R.id.playerHand);
+        computerHand = findViewById(R.id.computerHand);
 
         View.OnClickListener listener = v -> {
             if (v == rockBtn) userChoice = 0;
@@ -45,6 +50,9 @@ public class RockPaperScissorsActivity extends AppCompatActivity {
         botChoice = random.nextInt(3);
         String userStr = choices[userChoice];
         String botStr = choices[botChoice];
+        // Update hand images
+        playerHand.setImageResource(handDrawables[userChoice]);
+        computerHand.setImageResource(handDrawables[botChoice]);
         String result;
         String pointResult;
         String outcome;

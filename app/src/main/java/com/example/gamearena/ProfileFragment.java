@@ -34,15 +34,7 @@ public class ProfileFragment extends Fragment {
         ImageView avatarImage = view.findViewById(R.id.avatarImage);
         TextView nicknameText = view.findViewById(R.id.nicknameText);
         pointsText = view.findViewById(R.id.pointsText);
-        TextView winsText = view.findViewById(R.id.winsText);
-        TextView drawsText = view.findViewById(R.id.drawsText);
-        TextView lossesText = view.findViewById(R.id.lossesText);
-        TextView rpsStatsText = view.findViewById(R.id.rpsStatsText);
-        TextView quickMathStatsText = view.findViewById(R.id.quickMathStatsText);
-        TextView snakeStatsText = view.findViewById(R.id.snakeStatsText);
         TextView levelText = view.findViewById(R.id.levelText);
-        TextView tile2048StatsText = view.findViewById(R.id.tile2048StatsText);
-        TextView ticTacToeStatsText = view.findViewById(R.id.ticTacToeStatsText);
         TextView achievementsText = view.findViewById(R.id.achievementsText);
         ImageButton editAvatarBtn = view.findViewById(R.id.editAvatarBtn);
 
@@ -64,33 +56,23 @@ public class ProfileFragment extends Fragment {
                 avatarImage.setImageResource(R.drawable.splash_logo); // fallback to a bundled image
             }
         }
-        rpsStatsText.setText("RPS: " + rpsWins + "W " + rpsDraws + "D " + rpsLosses + "L");
 
         // --- Tic-Tac-Toe Stats ---
         int tttWins = prefs.getInt("tictactoe_wins", 0);
         int tttLosses = prefs.getInt("tictactoe_losses", 0);
         int tttDraws = prefs.getInt("tictactoe_draws", 0);
-        ticTacToeStatsText.setText("Tic-Tac-Toe:\nWins: " + tttWins + " / Losses: " + tttLosses + " / Draws: " + tttDraws);
-        winsText.setText("Wins: " + tttWins);
-        drawsText.setText("Draws: " + tttDraws);
-        lossesText.setText("Losses: " + tttLosses);
 
         // --- Quick Math Stats ---
         int qmCorrect = prefs.getInt("quickmath_correct", 0);
         int qmWrong = prefs.getInt("quickmath_wrong", 0);
         int qmStreak = prefs.getInt("quickmath_streak", 0);
-        quickMathStatsText.setText("Quick Math Challenge:\nCorrect Answers: " + qmCorrect + " / Wrong Answers: " + qmWrong + "\nBest Streak: " + qmStreak);
-
         // --- Snake Stats ---
         int snakeBest = prefs.getInt("snake_best", 0);
         int snakeFood = prefs.getInt("snake_food", 0);
-        snakeStatsText.setText("Snake:\nHighest Score: " + snakeBest + "\nTotal Food Eaten: " + snakeFood);
-
         int points = prefs.getInt("points", 0);
         int level = points / 100 + 1;
         levelText.setText("Level: " + level);
 
-        tile2048StatsText.setText("[2048]: Best Tile: " + prefs.getInt("2048_best_tile", 0));
 
         StringBuilder ach = new StringBuilder();
         if (prefs.getBoolean("ach_first_win", false)) ach.append("✅ First Win\n");

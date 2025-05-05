@@ -62,7 +62,17 @@
             android:adjustViewBounds="true"
             android:layout_marginBottom="8dp"/>
 
-        <!-- Removed Sudoku button -->
+        <ImageButton
+            android:id="@+id/PingPongvsBlocksBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ping_pong_vs_blocks_logo"
+            android:background="@android:color/transparent"
+            android:contentDescription="2048"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:layout_marginBottom="8dp"/>
+
 
         <ImageButton
             android:id="@+id/ticTacToeBotBtn"
@@ -71,6 +81,28 @@
             android:src="@drawable/tictactoe_vs_bot_logo"
             android:background="@android:color/transparent"
             android:contentDescription="TicTacToe vs Bot"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:layout_marginBottom="16dp"/>
+
+        <ImageButton
+            android:id="@+id/TowerBlockBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/tower_block_logo"
+            android:background="@android:color/transparent"
+            android:contentDescription="Tower Block"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:layout_marginBottom="16dp"/>
+
+        <ImageButton
+            android:id="@+id/ImposterColorBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/imposter_color_logo"
+            android:background="@android:color/transparent"
+            android:contentDescription="Imposter Color"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"
             android:layout_marginBottom="16dp"/>
@@ -95,12 +127,46 @@
             android:layout_marginBottom="12dp"/>
 
         <ImageButton
+            android:id="@+id/wordScrambleBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/word_scramble_logo"
+            android:background="@android:color/transparent"
+            android:contentDescription="TicTacToe (Player vs Player)"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:layout_marginBottom="12dp"/>
+
+        <ImageButton
             android:id="@+id/aliasBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/alias_logo"
             android:background="@android:color/transparent"
             android:contentDescription="Alias"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:layout_marginBottom="12dp"/>
+
+        <ImageButton
+            android:id="@+id/fasttypingBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fast_typing_logo"
+            android:background="@android:color/transparent"
+            android:contentDescription="Fast Typing Challange"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:layout_marginBottom="12dp"/>
+
+
+        <ImageButton
+            android:id="@+id/PingPong"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ping_pong_logo"
+            android:background="@android:color/transparent"
+            android:contentDescription="Ping Pong"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"
             android:layout_marginBottom="12dp"/>

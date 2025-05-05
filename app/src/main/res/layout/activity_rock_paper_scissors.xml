@@ -1,66 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
-    android:padding="24dp"
     android:background="@color/ga_bg_dark">
 
+    <!-- Player Score (Top Left) -->
+    <TextView
+        android:id="@+id/playerLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Player"
+        android:textSize="18sp"
+        android:textColor="@color/ga_text_primary"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"/>
+
+    <TextView
+        android:id="@+id/playerScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="18sp"
+        android:textColor="@color/ga_text_secondary"
+        android:layout_below="@id/playerLabel"
+        android:layout_alignStart="@id/playerLabel"
+        android:layout_marginTop="4dp"/>
+
+    <!-- Computer Score (Top Right) -->
+    <TextView
+        android:id="@+id/computerLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Computer"
+        android:textSize="18sp"
+        android:textColor="@color/ga_text_primary"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="32dp"/>
+
+    <TextView
+        android:id="@+id/computerScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="18sp"
+        android:textColor="@color/ga_text_secondary"
+        android:layout_below="@id/computerLabel"
+        android:layout_alignEnd="@id/computerLabel"
+        android:layout_marginTop="4dp"/>
+
+    <!-- Heading -->
     <TextView
         android:id="@+id/statusText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Choose Rock, Paper, or Scissors"
-        android:textSize="20sp"
-        android:textColor="@color/ga_neon_blue"
-        android:layout_marginBottom="16dp"
-        style="@style/GameArenaHeading"/>
+        android:text="Choose an option"
+        android:textSize="26sp"
+        android:textColor="@color/ga_text_primary"
+        style="@style/GameArenaHeading"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:layout_below="@id/playerLabel"/>
 
+    <!-- Hands -->
     <LinearLayout
+        android:id="@+id/handsRow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:layout_below="@id/statusText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp">
+        <ImageView
+            android:id="@+id/playerHand"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_hand_rock"
+            android:contentDescription="Player Hand"/>
+        <Space
+            android:layout_width="48dp"
+            android:layout_height="1dp"/>
+        <ImageView
+            android:id="@+id/computerHand"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_hand_rock"
+            android:contentDescription="Computer Hand"/>
+    </LinearLayout>
+
+    <!-- Buttons -->
+    <LinearLayout
+        android:id="@+id/buttonsRow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_below="@id/handsRow"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp">
         <Button
             android:id="@+id/rockBtn"
             android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:text="Rock"
+            android:layout_height="48dp"
+            android:text="rock"
             style="@style/GameArenaButton"
             android:layout_margin="8dp"/>
         <Button
             android:id="@+id/paperBtn"
             android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:text="Paper"
+            android:layout_height="48dp"
+            android:text="paper"
             style="@style/GameArenaButton"
             android:layout_margin="8dp"/>
         <Button
             android:id="@+id/scissorsBtn"
             android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:text="Scissors"
+            android:layout_height="48dp"
+            android:text="scissors"
             style="@style/GameArenaButton"
             android:layout_margin="8dp"/>
     </LinearLayout>
 
+    <!-- Result -->
     <TextView
         android:id="@+id/resultText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:textColor="@color/ga_text_secondary"
-        android:layout_marginTop="24dp"
+        android:layout_below="@id/buttonsRow"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
         android:gravity="center"/>
 
+    <!-- Play Again Button -->
     <Button
         android:id="@+id/playAgainBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Play Again"
         style="@style/GameArenaButton"
+        android:layout_below="@id/resultText"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="24dp"
         android:visibility="gone"/>
 
-</LinearLayout>
+</RelativeLayout>

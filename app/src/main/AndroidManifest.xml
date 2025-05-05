@@ -34,6 +34,12 @@
         <activity android:name=".SnakeActivity" android:exported="false" />
         <activity android:name=".Game2048Activity" android:exported="false" />
         <activity android:name=".RockPaperScissorsActivity" android:exported="false" />
+        <activity android:name=".PingPongVsBlocksActivity" />
+        <activity android:name=".TowerBlockActivity" />
+        <activity android:name=".ImposterColorActivity" />
+        <activity android:name=".WordScrambleActivity" />
+        <activity android:name=".FastTypingActivity" />
+        <activity android:name=".PingPongUserVsUserActivity" />
     </application>
 
     <!-- Removed SudokuActivity from manifest -->

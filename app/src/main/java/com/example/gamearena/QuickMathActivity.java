@@ -14,121 +14,171 @@ import java.util.Random;
 import com.example.gamearena.PointManager;
 
 public class QuickMathActivity extends AppCompatActivity {
-    private TextView progressText, questionText, feedbackText, scoreText;
-    private EditText answerInput;
-    private Button submitBtn, finishBtn;
-    private int currentQuestion = 0;
-    private int correctAnswers = 0;
+    private TextView questionText, feedbackText, scoreText, timerText; // Removed progressText, added timerText
+    private Button answerBtn1, answerBtn2, answerBtn3, answerBtn4, finishBtn; // Four answer buttons
     private int score = 0;
-    private int[] answers = new int[10];
-    private String[] questions = new String[10];
+    private int correctAnswers = 0;
+    private int[] answers = new int[1];
+    private String[] questions = new String[1];
     private Random random = new Random();
-    private int[] userAnswers = new int[10];
+    private int timerSeconds = 10;
+    private android.os.CountDownTimer countDownTimer; // Timer for each question
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quick_math);
-        progressText = findViewById(R.id.progressText);
+        timerText = findViewById(R.id.timerText);
         questionText = findViewById(R.id.questionText);
         feedbackText = findViewById(R.id.feedbackText);
         scoreText = findViewById(R.id.scoreText);
-        answerInput = findViewById(R.id.answerInput);
-        submitBtn = findViewById(R.id.submitBtn);
+        answerBtn1 = findViewById(R.id.answerBtn1);
+        answerBtn2 = findViewById(R.id.answerBtn2);
+        answerBtn3 = findViewById(R.id.answerBtn3);
+        answerBtn4 = findViewById(R.id.answerBtn4);
         finishBtn = findViewById(R.id.finishBtn);
-        generateQuestions();
+        generateQuestion();
         showQuestion();
 
-        submitBtn.setOnClickListener(v -> checkAnswer());
+        View.OnClickListener answerListener = v -> checkAnswer(((Button)v).getText().toString());
+        answerBtn1.setOnClickListener(answerListener);
+        answerBtn2.setOnClickListener(answerListener);
+        answerBtn3.setOnClickListener(answerListener);
+        answerBtn4.setOnClickListener(answerListener);
         finishBtn.setOnClickListener(v -> finishGame());
     }
 
-    private void generateQuestions() {
-        for (int i = 0; i < 10; i++) {
-            int a = random.nextInt(20) + 1;
-            int b = random.nextInt(20) + 1;
-            int op = random.nextInt(4);
-            switch (op) {
-                case 0:
-                    questions[i] = a + " + " + b;
-                    answers[i] = a + b;
-                    break;
-                case 1:
-                    questions[i] = a + " - " + b;
-                    answers[i] = a - b;
-                    break;
-                case 2:
-                    questions[i] = a + " × " + b;
-                    answers[i] = a * b;
-                    break;
-                case 3:
-                    int divisor = random.nextInt(10) + 1;
-                    int dividend = divisor * (random.nextInt(10) + 1);
-                    questions[i] = dividend + " ÷ " + divisor;
-                    answers[i] = dividend / divisor;
-                    break;
-            }
+    private void generateQuestion() {
+        int a = random.nextInt(20) + 1;
+        int b = random.nextInt(20) + 1;
+        int op = random.nextInt(4);
+        switch (op) {
+            case 0:
+                questions[0] = a + " + " + b;
+                answers[0] = a + b;
+                break;
+            case 1:
+                questions[0] = a + " - " + b;
+                answers[0] = a - b;
+                break;
+            case 2:
+                questions[0] = a + " × " + b;
+                answers[0] = a * b;
+                break;
+            case 3:
+                int divisor = random.nextInt(10) + 1;
+                int dividend = divisor * (random.nextInt(10) + 1);
+                questions[0] = dividend + " ÷ " + divisor;
+                answers[0] = dividend / divisor;
+                break;
         }
     }
 
     private void showQuestion() {
-        progressText.setText("Question " + (currentQuestion + 1) + "/10");
-        questionText.setText(questions[currentQuestion]);
-        answerInput.setText("");
+        questionText.setText(questions[0]);
         feedbackText.setText("");
+        // Generate 3 wrong answers and shuffle
+        int correct = answers[0];
+        int[] options = new int[4];
+        options[0] = correct;
+        int count = 1;
+        while (count < 4) {
+            int wrong = correct + random.nextInt(11) - 5;
+            if (wrong == correct || contains(options, wrong, count)) continue;
+            options[count++] = wrong;
+        }
+        // Shuffle options
+        for (int i = 3; i > 0; i--) {
+            int j = random.nextInt(i + 1);
+            int tmp = options[i]; options[i] = options[j]; options[j] = tmp;
+        }
+        answerBtn1.setText(String.valueOf(options[0]));
+        answerBtn2.setText(String.valueOf(options[1]));
+        answerBtn3.setText(String.valueOf(options[2]));
+        answerBtn4.setText(String.valueOf(options[3]));
+        enableAnswerButtons(true);
+        finishBtn.setVisibility(View.GONE);
+        startTimer();
     }
 
-    private void checkAnswer() {
-        String input = answerInput.getText().toString().trim();
-        if (input.isEmpty()) {
-            feedbackText.setText("Enter your answer");
-            return;
-        }
-        int userAns = Integer.parseInt(input);
-        userAnswers[currentQuestion] = userAns;
-        boolean correct = userAns == answers[currentQuestion];
+    private boolean contains(int[] arr, int val, int len) {
+        for (int i = 0; i < len; i++) if (arr[i] == val) return true;
+        return false;
+    }
+
+    private void checkAnswer(String selected) {
+        if (countDownTimer != null) countDownTimer.cancel();
+        int userAns = Integer.parseInt(selected);
+        boolean correct = userAns == answers[0];
         if (correct) {
             correctAnswers++;
             score += 2;
             feedbackText.setText("Correct! +2 points");
-        } else {
-            feedbackText.setText("Wrong! Correct: " + answers[currentQuestion]);
-        }
-        scoreText.setText("Score: " + score);
-        PointManager.getInstance().updateQuickMath(correct);
-        updatePointsUIAndSync();
-        submitBtn.setEnabled(false);
-        finishBtn.setVisibility(View.VISIBLE);
-        if (currentQuestion < 9) {
-            finishBtn.setText("Next");
-            finishBtn.setOnClickListener(v -> {
-                currentQuestion++;
-                submitBtn.setEnabled(true);
-                finishBtn.setVisibility(View.GONE);
+            scoreText.setText("Score: " + score);
+            PointManager.getInstance().updateQuickMath(true);
+            updatePointsUIAndSync();
+            enableAnswerButtons(false);
+            // Next question after short delay
+            new android.os.Handler().postDelayed(() -> {
+                generateQuestion();
                 showQuestion();
-            });
+            }, 700);
         } else {
-            finishBtn.setText("Finish");
-            finishBtn.setOnClickListener(v -> finishGame());
+            feedbackText.setText("You lose! Correct: " + answers[0]);
+            scoreText.setText("Score: " + score);
+            PointManager.getInstance().updateQuickMath(false);
+            updatePointsUIAndSync();
+            enableAnswerButtons(false);
+            finishBtn.setText("Restart");
+            finishBtn.setVisibility(View.VISIBLE);
+            finishBtn.setOnClickListener(v -> restartGame());
         }
     }
 
+    private void enableAnswerButtons(boolean enable) {
+        answerBtn1.setEnabled(enable);
+        answerBtn2.setEnabled(enable);
+        answerBtn3.setEnabled(enable);
+        answerBtn4.setEnabled(enable);
+    }
+
     private void finishGame() {
-        int bonus = 0;
-        if (correctAnswers == 10) bonus = 10;
-        else if (correctAnswers >= 8) bonus = 5;
-        if (bonus > 0 && correctAnswers == 10) {
-            // Only +10 bonus for 10 correct in a row (handled by PointManager)
-            // No need to add here, PointManager already does
-        } else {
-            score += bonus;
-        }
-        String bonusMsg = bonus > 0 ? "\nBonus: +" + bonus + " points" : "";
-        feedbackText.setText("You got " + correctAnswers + "/10 correct!\nTotal: " + score + " points" + bonusMsg);
+        if (countDownTimer != null) countDownTimer.cancel();
+        feedbackText.setText("Game Over!\nScore: " + score);
         scoreText.setText("Score: " + score);
         updatePointsUIAndSync();
-        submitBtn.setEnabled(false);
-        finishBtn.setVisibility(View.GONE);
+        enableAnswerButtons(false);
+        finishBtn.setText("Restart");
+        finishBtn.setVisibility(View.VISIBLE);
+        finishBtn.setOnClickListener(v -> restartGame());
+    }
+
+    private void restartGame() {
+        score = 0;
+        correctAnswers = 0;
+        feedbackText.setText("");
+        scoreText.setText("Score: 0");
+        generateQuestion();
+        showQuestion();
+    }
+
+    private void startTimer() {
+        if (countDownTimer != null) countDownTimer.cancel();
+        timerText.setText(String.valueOf(timerSeconds));
+        countDownTimer = new android.os.CountDownTimer(timerSeconds * 1000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                timerText.setText(String.valueOf(millisUntilFinished / 1000));
+            }
+            public void onFinish() {
+                timerText.setText("0");
+                feedbackText.setText("Time's up! You lose!");
+                enableAnswerButtons(false);
+                finishBtn.setText("Restart");
+                finishBtn.setVisibility(View.VISIBLE);
+                finishBtn.setOnClickListener(v -> restartGame());
+            }
+        };
+        countDownTimer.start();
     }
 
     private void updatePointsUIAndSync() {
