@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#181B20">
+
+    <!-- Player Score (Top Left) -->
+    <TextView
+        android:id="@+id/playerLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Player"
+        android:textSize="40sp"
+        android:textColor="@color/ga_text_primary"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="64dp"/>
+
+    <TextView
+        android:id="@+id/playerScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="40sp"
+        android:textColor="@color/ga_text_secondary"
+        android:layout_below="@id/playerLabel"
+        android:layout_alignStart="@id/playerLabel"
+        android:layout_marginTop="4dp"/>
+
+    <!-- Computer Score (Top Right) -->
+    <TextView
+        android:id="@+id/computerLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Computer"
+        android:textSize="40sp"
+        android:textColor="@color/ga_text_primary"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="64dp"/>
+
+    <TextView
+        android:id="@+id/computerScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="40sp"
+        android:textColor="@color/ga_text_secondary"
+        android:layout_below="@id/computerLabel"
+        android:layout_alignEnd="@id/computerLabel"
+        android:layout_marginTop="4dp"/>
+
+    <!-- Heading -->
+    <TextView
+        android:id="@+id/statusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose an option"
+        android:textSize="40sp"
+        android:textColor="@color/ga_text_primary"
+        style="@style/GameArenaHeading"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:layout_below="@id/playerLabel"/>
+
+    <!-- Hands -->
+    <LinearLayout
+        android:id="@+id/handsRow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_below="@id/statusText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp">
+        <ImageView
+            android:id="@+id/playerHand"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/ic_hand_rock"
+            android:contentDescription="Player Hand"/>
+        <Space
+            android:layout_width="200dp"
+            android:layout_height="1dp"/>
+        <ImageView
+            android:id="@+id/computerHand"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/ic_hand_rock"
+            android:contentDescription="Computer Hand"/>
+    </LinearLayout>
+
+    <!-- Buttons -->
+    <LinearLayout
+        android:id="@+id/buttonsRow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_below="@id/handsRow"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp">
+        <Button
+            android:id="@+id/rockBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ROCK"
+            android:layout_margin="15dp"
+            android:textColor="@color/white"
+            android:backgroundTint="#5396FF"
+            android:textSize="40sp"
+            android:layout_marginStart="8dp"
+            android:layout_gravity="center_horizontal"/>
+        <Button
+            android:id="@+id/paperBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PAPER"
+            android:textColor="@color/white"
+            android:backgroundTint="#5396FF"
+            android:layout_margin="15dp"
+            android:textSize="40sp"
+            android:layout_marginStart="8dp"
+            android:layout_gravity="center_horizontal"/>
+        <Button
+            android:id="@+id/scissorsBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SCISSORS"
+            android:textColor="@color/white"
+            android:backgroundTint="#5396FF"
+            android:layout_margin="15dp"
+            android:textSize="40sp"
+            android:layout_marginStart="8dp"
+            android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
+
+    <!-- Result -->
+    <TextView
+        android:id="@+id/resultText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="#181B20"
+        android:layout_below="@id/buttonsRow"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:gravity="center"/>
+
+    <!-- Play Again Button -->
+    <Button
+        android:id="@+id/playAgainBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Play Again"
+        android:layout_below="@id/resultText"
+        android:textColor="@color/white"
+        android:backgroundTint="#5396FF"
+        android:layout_margin="15dp"
+        android:textSize="40sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="8dp"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"/>
+
+</RelativeLayout>

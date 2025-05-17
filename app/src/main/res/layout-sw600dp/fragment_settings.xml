@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp"
+    android:background="#181B20">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="top">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Settings"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="16dp"
+                style="@style/GameArenaHeading"/>
+
+            <!-- Edit Profile Section -->
+            <TextView
+                android:id="@+id/editProfileHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Edit Profile"
+                android:textStyle="bold"
+                android:textSize="40sp"
+                android:paddingTop="16dp"
+                android:paddingBottom="8dp"
+                android:textColor="#FF6A36"/>
+            <EditText
+                android:id="@+id/nicknameEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Edit Nickname"
+                android:textSize="30dp"
+                android:textColorHint="@color/white"
+                android:textColor="@color/white"
+                android:inputType="textPersonName"/>
+            <Button
+                android:id="@+id/saveNicknameBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save Nickname"
+                android:layout_marginTop="16dp"
+                android:textSize="30dp"
+                android:textColor="@color/white"
+                android:backgroundTint="#5396FF"/>
+            <Button
+                android:id="@+id/deleteAvatarBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delete Avatar"
+                android:layout_marginTop="16dp"
+                android:textSize="30dp"
+                android:textColor="@android:color/white"
+                android:backgroundTint="#5396FF"/>
+
+            <!-- Manage Account Section -->
+            <TextView
+                android:id="@+id/manageAccountHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Manage Account"
+                android:textStyle="bold"
+                android:textSize="40sp"
+                android:paddingTop="16dp"
+                android:paddingBottom="8dp"
+                android:textColor="#FF6A36"/>
+            <Button
+                android:id="@+id/logoutBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Logout"
+                android:layout_marginTop="16dp"
+                android:textSize="30dp"
+                android:textColor="@android:color/white"
+                android:backgroundTint="#5396FF"/>
+
+            <Button
+                android:id="@+id/deleteAccountBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delete Account"
+                android:textSize="30dp"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="#5396FF"
+                android:textColor="@android:color/white"/>
+
+            <Button
+                android:id="@+id/rankedGamesInfoBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ranked Games Info"
+                android:textColor="@color/white"
+                android:backgroundTint="#5396FF"
+                android:textSize="30dp"
+                android:layout_marginTop="32dp"/>
+
+            <!-- About the App -->
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:paddingBottom="58dp">
+        <TextView
+            android:id="@+id/versionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:text="Version: 1.0.0"
+            android:textColor="@color/ga_text_secondary"/>
+        <TextView
+            android:id="@+id/creditsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:text="Made by Ashot Hovhannisyan"
+            android:textColor="@color/ga_text_secondary"/>
+    </LinearLayout>
+</FrameLayout>

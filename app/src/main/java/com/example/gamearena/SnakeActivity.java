@@ -29,7 +29,7 @@ public class SnakeActivity extends AppCompatActivity {
     private TextView pointNotificationText;
     private Handler pointMsgHandler = new Handler();
     private static final int INITIAL_SNAKE_LENGTH = 3;
-    private static final int CELL_SIZE_DP = 20;
+    // private static final int CELL_SIZE_DP = 20; // Not used for tablets, cell size will be dynamic
     private static final int UPDATE_DELAY = 200; // ms
     private int sessionPoints = 0;
     private int sessionWins = 0;
@@ -109,13 +109,21 @@ public class SnakeActivity extends AppCompatActivity {
             restartBtn.setVisibility(View.GONE);
             startNewGame();
         });
-        setupGrid();
-        startNewGame();
+        // Dynamically size cells to fill snakeGrid after layout
+        snakeGrid.getViewTreeObserver().addOnGlobalLayoutListener(new android.view.ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                snakeGrid.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                int gridSizePx = Math.min(snakeGrid.getWidth(), snakeGrid.getHeight());
+                int cellSizePx = gridSizePx / GRID_SIZE;
+                setupGrid(cellSizePx);
+                startNewGame();
+            }
+        });
     }
 
-    private void setupGrid() {
+    private void setupGrid(int cellSizePx) {
         snakeGrid.removeAllViews();
-        int cellSizePx = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, CELL_SIZE_DP, getResources().getDisplayMetrics());
         for (int i = 0; i < GRID_SIZE; i++) {
             for (int j = 0; j < GRID_SIZE; j++) {
                 View cell = new View(this);

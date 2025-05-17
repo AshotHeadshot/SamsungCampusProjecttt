@@ -16,11 +16,6 @@ public class SudokuActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sudoku);
-        sudokuBoard = findViewById(R.id.sudokuBoard);
-        checkBtn = findViewById(R.id.checkBtn);
-        newGameBtn = findViewById(R.id.newGameBtn);
-        hintBtn = findViewById(R.id.hintBtn);
         generatePuzzle();
         sudokuBoard.setPuzzle(puzzle, isFixed);
         checkBtn.setOnClickListener(v -> checkSolution());

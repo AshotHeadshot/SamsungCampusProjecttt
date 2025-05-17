@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/tictactoe_root_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center"
+    android:background="#181B20">
+
+    <TextView
+        android:id="@+id/statusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="X's turn"
+        android:textSize="80sp"
+        android:textColor="#fff"
+        android:layout_marginBottom="18dp"
+        android:layout_gravity="center" />
+
+    <GridLayout
+        android:id="@+id/ticGrid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rowCount="3"
+        android:columnCount="3"
+        android:layout_gravity="center"
+        android:background="#222"
+        android:padding="30dp">
+
+        <Button android:id="@+id/button_00" android:layout_width="200dp" android:layout_height="200dp" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="@color/ga_card_bg" android:layout_margin="5dp"/>
+        <Button android:id="@+id/button_01" android:layout_width="200dp" android:layout_height="200dp" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="@color/ga_card_bg" android:layout_margin="5dp"/>
+        <Button android:id="@+id/button_02" android:layout_width="200dp" android:layout_height="200dp" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="@color/ga_card_bg" android:layout_margin="5dp"/>
+        <Button android:id="@+id/button_10" android:layout_width="200dp" android:layout_height="200dp" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="@color/ga_card_bg" android:layout_margin="5dp"/>
+        <Button android:id="@+id/button_11" android:layout_width="200dp" android:layout_height="200dp" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="@color/ga_card_bg" android:layout_margin="5dp"/>
+        <Button android:id="@+id/button_12" android:layout_width="200dp" android:layout_height="200dp" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="@color/ga_card_bg" android:layout_margin="5dp"/>
+        <Button android:id="@+id/button_20" android:layout_width="200dp" android:layout_height="200dp" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="@color/ga_card_bg" android:layout_margin="5dp"/>
+        <Button android:id="@+id/button_21" android:layout_width="200dp" android:layout_height="200dp" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="@color/ga_card_bg" android:layout_margin="5dp"/>
+        <Button android:id="@+id/button_22" android:layout_width="200dp" android:layout_height="200dp" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="@color/ga_card_bg" android:layout_margin="5dp"/>
+    </GridLayout>
+
+    <Button
+        android:id="@+id/resetBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Play Again"
+        android:layout_gravity="center"
+        android:backgroundTint="#5396FF"
+        android:textColor="#fff"
+        android:layout_marginTop="35dp"
+        android:textSize="50sp"
+        android:layout_marginStart="8dp"/>
+
+</LinearLayout>

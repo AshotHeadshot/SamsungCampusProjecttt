@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.recyclerview.widget.RecyclerView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/gamesRecyclerView"
+    android:layout_width="match_parent"
+    android:paddingTop="8dp"
+    android:paddingBottom="72dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:clipToPadding="false"
+
+    android:layout_height="wrap_content"
+    android:src="@drawable/quick_math_challenge_logo"
+    android:background="@android:color/transparent"
+    android:contentDescription="Quick Math Challenge"
+    android:scaleType="fitCenter"
+    android:adjustViewBounds="true"
+    android:layout_marginBottom="8dp"/>

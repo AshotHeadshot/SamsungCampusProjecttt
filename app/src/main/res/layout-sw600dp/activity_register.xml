@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#181B20"
+    android:layout_gravity="center"
+    android:padding="32dp">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/register_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register for Game Arena"
+        android:textColor="#FFFFFF"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="32dp"/>
+
+    <!-- Subtitle -->
+    <TextView
+        android:id="@+id/register_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create your account to join the arena"
+        android:textColor="#B0B0B0"
+        android:textSize="25sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="32dp"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Email Label -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:layout_marginTop="32dp"
+        android:textSize="40dp"/>
+
+    <!-- Email Input -->
+    <EditText
+        android:id="@+id/email_input"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:hint="your@email.com"
+        android:inputType="textEmailAddress"
+        android:textColor="#FFFFFF"
+        android:textSize="40dp"
+        android:textColorHint="#606060"
+        android:background="@drawable/edittext_bg"
+        android:padding="4dp"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Nickname Label -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nickname"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:textSize="40dp"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Nickname Input -->
+    <EditText
+        android:id="@+id/nickname_input"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:hint="Your nickname"
+        android:inputType="textPersonName"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#606060"
+        android:background="@drawable/edittext_bg"
+        android:padding="12dp"
+        android:textSize="40dp"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Password Label -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:textSize="40dp"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Password Input -->
+    <EditText
+        android:id="@+id/password_input"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:hint="Your password"
+        android:inputType="textPassword"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#606060"
+        android:background="@drawable/edittext_bg"
+        android:padding="12dp"
+        android:textSize="40dp"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Confirm Password Label -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm Password"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:textSize="40dp"
+        android:layout_marginTop="8dp"/>
+
+    <!-- Confirm Password Input -->
+    <EditText
+        android:id="@+id/confirm_password_input"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:textSize="40dp"
+        android:hint="Repeat your password"
+        android:inputType="textPassword"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#606060"
+        android:background="@drawable/edittext_bg"
+        android:padding="12dp"
+        android:layout_marginBottom="24dp"/>
+
+    <!-- Register Button -->
+    <Button
+        android:id="@+id/register_button"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:text="Register"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#FF5C1D"
+        android:textStyle="bold"
+        android:textSize="40dp"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Login Link -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already have an account? "
+            android:textColor="#FFFFFF"
+            android:textSize="40dp"/>
+
+        <TextView
+            android:id="@+id/login_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:textColor="#FF5C1D"
+            android:textStyle="bold"
+            android:textSize="40dp"/>
+    </LinearLayout>
+
+</LinearLayout>
