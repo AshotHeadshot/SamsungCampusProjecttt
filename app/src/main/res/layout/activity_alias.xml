@@ -5,8 +5,35 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="24dp"
-    android:background="@color/ga_bg_dark">
+    android:background="#181B20">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="8dp">
+        <TextView
+            android:id="@+id/team1ScoreText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Team 1: 0"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/ga_orange"
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/team2ScoreText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Team 2: 0"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/ga_orange"
+            android:gravity="center"/>
+    </LinearLayout>
     <TextView
         android:id="@+id/timerText"
         android:layout_width="wrap_content"
@@ -14,7 +41,7 @@
         android:text="Time: 60"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@color/ga_neon_blue"
+        android:textColor="@color/ga_orange"
         android:layout_marginBottom="8dp"
         style="@style/GameArenaHeading"/>
 
@@ -33,7 +60,7 @@
         android:layout_height="wrap_content"
         android:text="Word"
         android:textSize="24sp"
-        android:textColor="@color/ga_neon_blue"
+        android:textColor="@color/ga_orange"
         android:textStyle="bold"
         android:layout_marginBottom="16dp"
         style="@style/GameArenaHeading"/>
@@ -58,7 +85,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Correct"
-            style="@style/GameArenaButton"/>
+            android:backgroundTint="#5396FF"
+            android:textColor="#fff"
+            android:layout_gravity="center_horizontal"/>
         <Button
             android:id="@+id/skipBtn"
             android:layout_width="0dp"
@@ -66,7 +95,9 @@
             android:layout_weight="1"
             android:text="Skip"
             android:layout_marginStart="8dp"
-            style="@style/GameArenaButton"/>
+            android:backgroundTint="#5396FF"
+            android:textColor="#fff"
+            android:layout_gravity="center_horizontal"/>
     </LinearLayout>
 
     <Button
@@ -75,6 +106,8 @@
         android:layout_height="wrap_content"
         android:text="Start Classic Game"
         android:layout_marginTop="16dp"
-        style="@style/GameArenaButton"/>
+        android:backgroundTint="#5396FF"
+        android:textColor="#fff"
+        android:layout_gravity="center_horizontal"/>
 
 </LinearLayout>

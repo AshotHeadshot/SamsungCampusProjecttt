@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.widget.FrameLayout;
 import android.widget.GridLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.graphics.Color;
 import android.view.ViewGroup;
@@ -18,12 +20,64 @@ import java.util.Random;
 import java.util.ArrayList;
 import com.example.gamearena.PointManager;
 import android.widget.Toast;
+import androidx.core.app.NotificationCompat;
 
 public class SnakeActivity extends AppCompatActivity {
+    private android.widget.Button restartBtn;
     private static final int GRID_SIZE = 15;
+    private FrameLayout pointNotificationContainer;
+    private TextView pointNotificationText;
+    private Handler pointMsgHandler = new Handler();
     private static final int INITIAL_SNAKE_LENGTH = 3;
     private static final int CELL_SIZE_DP = 20;
     private static final int UPDATE_DELAY = 200; // ms
+    private int sessionPoints = 0;
+    private int sessionWins = 0;
+    private int sessionLosses = 0;
+    private int sessionDraws = 0;
+
+    // --- End-of-game summary dialog ---
+    private void showShortToast(String message) {
+        final Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+        toast.show();
+        new android.os.Handler().postDelayed(toast::cancel, 1000);
+    }
+
+    // Show '+1 point' message above the grid, fade out
+    // Show Toast point message (RPS style)
+    private void showPointMessage(String msg) {
+        showShortToast(msg);
+    }
+
+
+    private void showEndGameSummaryDialog(int score, int sessionPoints) {
+
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        String message = "Score: " + score + "\nPoints this session: " + sessionPoints;
+        builder.setTitle("Game Over")
+            .setMessage(message)
+            .setCancelable(false)
+            .setPositiveButton("OK", (dialog, which) -> {
+                // Win if score > 5 apples eaten, else loss
+                if (score > 5) {
+                    this.sessionPoints += score;
+                    this.sessionWins++;
+                    showShortToast("+" + score + " point");
+                } else {
+                    this.sessionPoints -= 3;
+                    this.sessionLosses++;
+                    showShortToast("-3 point");
+                }
+                PointManager.getInstance().applySessionPoints(this, this.sessionPoints, sessionWins, sessionLosses, sessionDraws);
+                this.sessionPoints = 0;
+                this.sessionWins = 0;
+                this.sessionLosses = 0;
+                this.sessionDraws = 0;
+                dialog.dismiss();
+            });
+        android.app.AlertDialog dialog = builder.create();
+        dialog.show();
+    }
     private static final int FOOD_COUNT = 3; // Number of red squares
 
     private enum Direction { UP, DOWN, LEFT, RIGHT }
@@ -45,7 +99,16 @@ public class SnakeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_snake);
         scoreText = findViewById(R.id.scoreText);
         snakeGrid = findViewById(R.id.snakeGrid);
+        pointNotificationContainer = findViewById(R.id.pointNotificationContainer);
+        pointNotificationText = findViewById(R.id.pointNotificationText);
+        if (pointNotificationContainer != null) pointNotificationContainer.setVisibility(View.INVISIBLE);
         gestureDetector = new GestureDetector(this, new GestureListener());
+        restartBtn = findViewById(R.id.restartBtn);
+        restartBtn.setVisibility(View.GONE);
+        restartBtn.setOnClickListener(v -> {
+            restartBtn.setVisibility(View.GONE);
+            startNewGame();
+        });
         setupGrid();
         startNewGame();
     }
@@ -68,6 +131,7 @@ public class SnakeActivity extends AppCompatActivity {
     }
 
     private void startNewGame() {
+        if (restartBtn != null) restartBtn.setVisibility(View.GONE);
         snake.clear();
         foodList.clear();
         isGameOver = false;
@@ -173,18 +237,25 @@ public class SnakeActivity extends AppCompatActivity {
         snake.addFirst(new int[]{newX, newY});
         boolean ate = false;
         for (int i = 0; i < foodList.size(); i++) {
-            int[] f = foodList.get(i);
-            if (newX == f[0] && newY == f[1]) {
-                score++;
-                PointManager.getInstance().addSnakeFood();
-                updatePointsUIAndSync();
-                foodList.remove(i);
-                placeFood();
-                updateScore();
-                ate = true;
-                break;
-            }
+    int[] f = foodList.get(i);
+    if (newX == f[0] && newY == f[1]) {
+        score++;
+        showShortToast("+1 point");
+        sessionPoints += 1;
+        PointManager.getInstance().applySessionPoints(this, sessionPoints, sessionWins, sessionLosses, sessionDraws);
+        // +20 bonus for reaching 30 (one-time)
+        if (score == 30) {
+            sessionPoints += 20;
+            PointManager.getInstance().applySessionPoints(this, sessionPoints, sessionWins, sessionLosses, sessionDraws);
+            showShortToast("+20 bonus!");
         }
+        foodList.remove(i);
+        placeFood();
+        updateScore();
+        ate = true;
+        break;
+    }
+}
         if (!ate) {
             snake.removeLast();
         }
@@ -203,7 +274,8 @@ public class SnakeActivity extends AppCompatActivity {
             editor.putBoolean("ach_snake_master", true);
         }
         editor.apply();
-        Toast.makeText(this, "Game Over! Score: " + score, Toast.LENGTH_LONG).show();
+        // Show restart button
+        if (restartBtn != null) restartBtn.setVisibility(View.VISIBLE);
     }
 
     @Override

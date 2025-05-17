@@ -7,14 +7,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 import com.example.gamearena.PointManager;
 
 public class RockPaperScissorsActivity extends AppCompatActivity {
+    private int playerScore = 0;
+    private int computerScore = 0;
+    private TextView playerScoreText, computerScoreText;
     private Button rockBtn, paperBtn, scissorsBtn, playAgainBtn;
     private TextView statusText, resultText;
     private ImageView playerHand, computerHand;
+    private int sessionPoints = 0;
+    private int sessionWins = 0;
+    private int sessionLosses = 0;
+    private int sessionDraws = 0;
     private String[] choices = {"Rock", "Paper", "Scissors"};
     private int[] handDrawables = {R.drawable.ic_hand_rock, R.drawable.ic_hand_paper, R.drawable.ic_hand_scissors};
     private Random random = new Random();
@@ -23,6 +31,10 @@ public class RockPaperScissorsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Restore scores from SharedPreferences
+        SharedPreferences prefs = getSharedPreferences("rps_scores", MODE_PRIVATE);
+        playerScore = prefs.getInt("playerScore", 0);
+        computerScore = prefs.getInt("computerScore", 0);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rock_paper_scissors);
         statusText = findViewById(R.id.statusText);
@@ -33,6 +45,9 @@ public class RockPaperScissorsActivity extends AppCompatActivity {
         playAgainBtn = findViewById(R.id.playAgainBtn);
         playerHand = findViewById(R.id.playerHand);
         computerHand = findViewById(R.id.computerHand);
+        playerScoreText = findViewById(R.id.playerScore);
+        computerScoreText = findViewById(R.id.computerScore);
+        updateScoreUI();
 
         View.OnClickListener listener = v -> {
             if (v == rockBtn) userChoice = 0;
@@ -43,10 +58,23 @@ public class RockPaperScissorsActivity extends AppCompatActivity {
         rockBtn.setOnClickListener(listener);
         paperBtn.setOnClickListener(listener);
         scissorsBtn.setOnClickListener(listener);
-        playAgainBtn.setOnClickListener(v -> resetGame());
+        playAgainBtn.setOnClickListener(v -> {
+            PointManager.getInstance().applySessionPoints(this, sessionPoints, sessionWins, sessionLosses, sessionDraws);
+            sessionPoints = 0;
+            sessionWins = 0;
+            sessionLosses = 0;
+            sessionDraws = 0;
+            resetGame();
+        });
     }
 
     private void playRound() {
+        // ...
+        // After updating scores, save them
+        saveScores();
+        // Update scores
+        int prevPlayerScore = playerScore;
+        int prevComputerScore = computerScore;
         botChoice = random.nextInt(3);
         String userStr = choices[userChoice];
         String botStr = choices[botChoice];
@@ -56,24 +84,35 @@ public class RockPaperScissorsActivity extends AppCompatActivity {
         String result;
         String pointResult;
         String outcome;
+        int deltaPoints = 0;
         if (userChoice == botChoice) {
             result = "Draw! ";
-            pointResult = "+2 points";
-            outcome = "draw";
+            pointResult = "+2 point";
+            sessionPoints += 2;
+            sessionDraws++;
+            // No score change for draw
+            PointManager.getInstance().applySessionPoints(this, sessionPoints, sessionWins, sessionLosses, sessionDraws);
+            showShortToast("+2 point");
         } else if ((userChoice == 0 && botChoice == 2) || (userChoice == 1 && botChoice == 0) || (userChoice == 2 && botChoice == 1)) {
             result = "You win! ";
-            pointResult = "+5 points";
-            outcome = "win";
+            pointResult = "+5 point";
+            sessionPoints += 5;
+            sessionWins++;
+            playerScore++;
+            PointManager.getInstance().applySessionPoints(this, sessionPoints, sessionWins, sessionLosses, sessionDraws);
+            showShortToast("+5 point");
         } else {
             result = "You lose! ";
-            pointResult = "-5 points";
-            outcome = "lose";
+            pointResult = "-5 point";
+            sessionPoints -= 5;
+            sessionLosses++;
+            computerScore++;
+            PointManager.getInstance().applySessionPoints(this, sessionPoints, sessionWins, sessionLosses, sessionDraws);
+            showShortToast("-5 point");
         }
+        updateScoreUI();
         statusText.setText("You: " + userStr + "  |  Bot: " + botStr);
-        resultText.setText(result + pointResult);
-        // Update points using PointManager
-        PointManager.getInstance().updateRPSResult(outcome);
-        updatePointsUIAndSync();
+        resultText.setText(result + pointResult + " | Total: " + sessionPoints + " point");
         rockBtn.setEnabled(false);
         paperBtn.setEnabled(false);
         scissorsBtn.setEnabled(false);
@@ -81,8 +120,6 @@ public class RockPaperScissorsActivity extends AppCompatActivity {
     }
 
     private void updatePointsUIAndSync() {
-        int points = PointManager.getInstance().getPoints();
-        statusText.setText("Points: " + points);
         PointManager.getInstance().syncPoints(this);
     }
 
@@ -93,5 +130,32 @@ public class RockPaperScissorsActivity extends AppCompatActivity {
         paperBtn.setEnabled(true);
         scissorsBtn.setEnabled(true);
         playAgainBtn.setVisibility(View.GONE);
+        updateScoreUI();
+        saveScores();
+    }
+
+    private void updateScoreUI() {
+        if (playerScoreText != null) playerScoreText.setText(String.valueOf(playerScore));
+        if (computerScoreText != null) computerScoreText.setText(String.valueOf(computerScore));
+    }
+
+    private void saveScores() {
+        SharedPreferences prefs = getSharedPreferences("rps_scores", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("playerScore", playerScore);
+        editor.putInt("computerScore", computerScore);
+        editor.apply();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveScores();
+    }
+
+    private void showShortToast(String message) {
+        final Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+        toast.show();
+        new android.os.Handler().postDelayed(toast::cancel, 1000);
     }
 }

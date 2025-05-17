@@ -18,6 +18,10 @@ public class QuickMathActivity extends AppCompatActivity {
     private Button answerBtn1, answerBtn2, answerBtn3, answerBtn4, finishBtn; // Four answer buttons
     private int score = 0;
     private int correctAnswers = 0;
+    private int sessionPoints = 0;
+    private int sessionWins = 0;
+    private int sessionLosses = 0;
+    private int sessionDraws = 0; // Not used in Quick Math, but for API consistency
     private int[] answers = new int[1];
     private String[] questions = new String[1];
     private Random random = new Random();
@@ -112,23 +116,51 @@ public class QuickMathActivity extends AppCompatActivity {
         boolean correct = userAns == answers[0];
         if (correct) {
             correctAnswers++;
-            score += 2;
-            feedbackText.setText("Correct! +2 points");
+            score += 1;
+            sessionPoints += 1;
             scoreText.setText("Score: " + score);
-            PointManager.getInstance().updateQuickMath(true);
-            updatePointsUIAndSync();
+            // Bonus for 10 correct in a row
+            if (correctAnswers > 0 && correctAnswers % 10 == 0) {
+                sessionPoints += 10;
+                showShortToast("+10 bonus!");
+            }
+            PointManager.getInstance().applySessionPoints(this, sessionPoints, sessionWins, sessionLosses, sessionDraws);
+            showShortToast("+1 point");
+            // Check win condition
+            if (score >= 10) {
+                feedbackText.setText("You Win! Score: " + score);
+                scoreText.setText("Score: " + score);
+                enableAnswerButtons(false);
+                finishBtn.setText("Restart");
+                finishBtn.setVisibility(View.VISIBLE);
+                finishBtn.setOnClickListener(v -> restartGame());
+                return;
+            }
+            // Continue to next question automatically after a short delay
             enableAnswerButtons(false);
-            // Next question after short delay
+            feedbackText.setText("Correct!");
             new android.os.Handler().postDelayed(() -> {
                 generateQuestion();
                 showQuestion();
             }, 700);
         } else {
-            feedbackText.setText("You lose! Correct: " + answers[0]);
-            scoreText.setText("Score: " + score);
-            PointManager.getInstance().updateQuickMath(false);
-            updatePointsUIAndSync();
+            sessionPoints -= 1;
+            sessionLosses++;
+            PointManager.getInstance().applySessionPoints(this, sessionPoints, sessionWins, sessionLosses, sessionDraws);
+            showShortToast("-1 point");
+            // Check lose condition
+            if (score < 3) {
+                feedbackText.setText("You Lose! Score: " + score);
+                scoreText.setText("Score: " + score); // Update scoreText
+                enableAnswerButtons(false);
+                finishBtn.setText("Restart");
+                finishBtn.setVisibility(View.VISIBLE);
+                finishBtn.setOnClickListener(v -> restartGame());
+                return;
+            }
             enableAnswerButtons(false);
+            feedbackText.setText("Incorrect! Game Over.");
+            scoreText.setText("Score: " + score); // Update scoreText
             finishBtn.setText("Restart");
             finishBtn.setVisibility(View.VISIBLE);
             finishBtn.setOnClickListener(v -> restartGame());
@@ -158,19 +190,20 @@ public class QuickMathActivity extends AppCompatActivity {
         correctAnswers = 0;
         feedbackText.setText("");
         scoreText.setText("Score: 0");
+        timerText.setText("Time: " + timerSeconds);
         generateQuestion();
         showQuestion();
     }
 
     private void startTimer() {
         if (countDownTimer != null) countDownTimer.cancel();
-        timerText.setText(String.valueOf(timerSeconds));
+        timerText.setText("Time: " + timerSeconds);
         countDownTimer = new android.os.CountDownTimer(timerSeconds * 1000, 1000) {
             public void onTick(long millisUntilFinished) {
-                timerText.setText(String.valueOf(millisUntilFinished / 1000));
+                timerText.setText("Time: " + (millisUntilFinished / 1000));
             }
             public void onFinish() {
-                timerText.setText("0");
+                timerText.setText("Time: 0");
                 feedbackText.setText("Time's up! You lose!");
                 enableAnswerButtons(false);
                 finishBtn.setText("Restart");
@@ -198,5 +231,11 @@ public class QuickMathActivity extends AppCompatActivity {
             editor.putBoolean("ach_math_wizard", true);
         }
         editor.apply();
+    }
+
+    private void showShortToast(String message) {
+        final android.widget.Toast toast = android.widget.Toast.makeText(this, message, android.widget.Toast.LENGTH_SHORT);
+        toast.show();
+        new android.os.Handler().postDelayed(toast::cancel, 1000);
     }
 }

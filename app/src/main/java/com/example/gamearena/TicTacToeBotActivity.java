@@ -4,12 +4,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class TicTacToeBotActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private int sessionPoints = 0;
+    private int sessionWins = 0;
+    private int sessionLosses = 0;
+    private int sessionDraws = 0;
+
+    // --- Show Play Again button and Toast at game end ---
+    private void showEndGame(String toastMsg) {
+        showShortToast(toastMsg);
+        playAgainBtn.setVisibility(View.VISIBLE);
+    }
+
     private Button[][] buttons = new Button[3][3];
+    private Button playAgainBtn;
     private boolean player1Turn = true;
     private int roundCount;
     private int player1Points;
@@ -35,10 +48,29 @@ public class TicTacToeBotActivity extends AppCompatActivity implements View.OnCl
             }
         }
 
-        Button buttonReset = findViewById(R.id.button_reset);
-        buttonReset.setOnClickListener(new View.OnClickListener() {
+        // Find the root LinearLayout by its ID
+        LinearLayout mainLayout = findViewById(R.id.tictactoe_root_layout);
+        // Create Play Again button programmatically
+        playAgainBtn = new Button(this);
+        playAgainBtn.setText("Play Again");
+        playAgainBtn.setTextColor(0xFFFFFFFF);
+        playAgainBtn.setBackgroundResource(R.drawable.btn_playagain_oval);
+        playAgainBtn.setTextSize(20);
+        playAgainBtn.setVisibility(View.GONE);
+        playAgainBtn.setPadding(40, 20, 40, 20);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.setMargins(0, 60, 0, 0);
+        params.gravity = android.view.Gravity.CENTER_HORIZONTAL;
+        playAgainBtn.setLayoutParams(params);
+        if (mainLayout != null) {
+            mainLayout.addView(playAgainBtn);
+        }
+        playAgainBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                playAgainBtn.setVisibility(View.GONE);
                 resetGame();
             }
         });
@@ -110,29 +142,30 @@ public class TicTacToeBotActivity extends AppCompatActivity implements View.OnCl
 
     private void player1Wins() {
         player1Points++;
-        Toast.makeText(this, "Player wins!", Toast.LENGTH_SHORT).show();
         updatePointsText();
-        PointManager.getInstance().updateTicTacToeResult(this, "win");
-        PointManager.getInstance().syncPoints(this);
-        PointManager.getInstance().loadPoints(this);
+        sessionPoints += 5;
+        PointManager.getInstance().applySessionPoints(this, sessionPoints, sessionWins, sessionLosses, sessionDraws);
+        sessionWins++;
+        PointManager.getInstance().applySessionPoints(this, sessionPoints, sessionWins, sessionLosses, sessionDraws);
+        showEndGame("You Win! +5 point");
         gameActive = false;
     }
 
     private void player2Wins() {
         player2Points++;
-        Toast.makeText(this, "AI wins!", Toast.LENGTH_SHORT).show();
         updatePointsText();
-        PointManager.getInstance().updateTicTacToeResult(this, "lose");
-        PointManager.getInstance().syncPoints(this);
-        PointManager.getInstance().loadPoints(this);
+        sessionPoints -= 5;
+        sessionLosses++;
+        PointManager.getInstance().applySessionPoints(this, sessionPoints, sessionWins, sessionLosses, sessionDraws);
+        showEndGame("You Lose! -5 point");
         gameActive = false;
     }
 
     private void draw() {
-        Toast.makeText(this, "Draw!", Toast.LENGTH_SHORT).show();
-        PointManager.getInstance().updateTicTacToeResult(this, "draw");
-        PointManager.getInstance().syncPoints(this);
-        PointManager.getInstance().loadPoints(this);
+        updatePointsText();
+        sessionPoints += 2;
+        sessionDraws++;
+        showEndGame("Draw! +2 point");
         gameActive = false;
     }
 
@@ -142,13 +175,13 @@ public class TicTacToeBotActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void resetGame() {
+        roundCount = 0;
+        player1Turn = true;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 buttons[i][j].setText("");
             }
         }
-        roundCount = 0;
-        player1Turn = true;
         gameActive = true;
     }
 
@@ -247,5 +280,11 @@ public class TicTacToeBotActivity extends AppCompatActivity implements View.OnCl
             }
         }
         player1Turn = true;
+    }
+
+    private void showShortToast(String message) {
+        final Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+        toast.show();
+        new android.os.Handler().postDelayed(toast::cancel, 1000);
     }
 }

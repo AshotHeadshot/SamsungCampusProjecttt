@@ -16,6 +16,7 @@ public class TicTacToeActivity extends AppCompatActivity {
     private Button[][] buttons = new Button[3][3];
     private boolean xTurn = true;
     private int moves = 0;
+    private int sessionPoints = 0;
     private TextView statusText;
     private boolean pvpMode = false;
 
@@ -37,11 +38,17 @@ public class TicTacToeActivity extends AppCompatActivity {
         resetBoard();
         // --- Manual Points Test Button ---
         statusText.setOnClickListener(v -> {
-            PointManager.getInstance().updateTicTacToeResult(this, "win");
+            // PointManager.getInstance().updateTicTacToeResult(this, "win"); // Removed, now handled by sessionPoints and summary dialog.
             PointManager.getInstance().syncPoints(this);
             PointManager.getInstance().loadPoints(this);
             int points = PointManager.getInstance().getPoints();
             Toast.makeText(this, "Manual points: " + points, Toast.LENGTH_LONG).show();
+        });
+
+        Button resetBtn = findViewById(R.id.resetBtn);
+        resetBtn.setOnClickListener(v -> {
+            resetBoard();
+            updatePointsUIAndSync();
         });
     }
 
@@ -111,7 +118,6 @@ public class TicTacToeActivity extends AppCompatActivity {
     }
 
     private void endGame(String result) {
-        Toast.makeText(this, "[TicTacToe] endGame called: " + result, Toast.LENGTH_SHORT).show();
         String outcome;
         String lowerResult = result.toLowerCase().trim();
         if (lowerResult.startsWith("x") && lowerResult.contains("win")) {
@@ -123,8 +129,7 @@ public class TicTacToeActivity extends AppCompatActivity {
         } else {
             outcome = "lose";
         }
-        Toast.makeText(this, "Outcome for points: " + outcome, Toast.LENGTH_SHORT).show();
-        // Only update points and stats if NOT in PvP mode (i.e., vs Bot only)
+        // Only update stats if NOT in PvP mode (i.e., vs Bot only)
         if (!pvpMode) {
             SharedPreferences prefs = getSharedPreferences("user_prefs", MODE_PRIVATE);
             SharedPreferences.Editor editor = prefs.edit();
@@ -134,15 +139,22 @@ public class TicTacToeActivity extends AppCompatActivity {
                 if (!prefs.getBoolean("ach_first_win", false)) {
                     editor.putBoolean("ach_first_win", true);
                 }
+                // Accumulate session points for win
+                sessionPoints += 5;
             } else if (outcome.equals("lose")) {
                 int losses = prefs.getInt("tictactoe_losses", 0) + 1;
                 editor.putInt("tictactoe_losses", losses);
+                // Accumulate session points for lose
+                sessionPoints -= 5;
             } else if (outcome.equals("draw")) {
                 int draws = prefs.getInt("tictactoe_draws", 0) + 1;
                 editor.putInt("tictactoe_draws", draws);
+                // Accumulate session points for draw
+                sessionPoints += 2;
             }
             editor.apply();
-            updatePointsUIAndSync();
+            // No direct point update here, will be applied at summary dialog
+
         }
         statusText.setText(result);
         for (int i = 0; i < 3; i++)
@@ -153,11 +165,10 @@ public class TicTacToeActivity extends AppCompatActivity {
     }
 
     private void updatePointsUIAndSync() {
-        PointManager.getInstance().syncPoints(this);
-        PointManager.getInstance().loadPoints(this);
-        int points = PointManager.getInstance().getPoints();
-        statusText.setText("Points: " + points);
-        Toast.makeText(this, "[TicTacToe] Syncing points: " + points, Toast.LENGTH_SHORT).show();
+        // No direct point update here, will be applied at summary dialog
+        // Optionally update UI if needed
+        // int points = PointManager.getInstance().getPoints();
+        // statusText.setText("Points: " + points);
     }
 
     public void onReset(View v) {

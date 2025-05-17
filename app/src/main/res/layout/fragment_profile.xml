@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="24dp"
-    android:background="@color/ga_bg_dark">
-
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent" android:padding="24dp" android:background="#181B20">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,15 +9,16 @@
         <!-- Avatar and Nickname -->
         <FrameLayout
             android:id="@+id/avatarFrame"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="16dp">
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="12dp"
+            android:background="#181B20">
             <ImageView
                 android:id="@+id/avatarImage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@android:drawable/sym_def_app_icon"
-                android:background="@color/ga_card_bg"
+                android:src="@drawable/ic_profile_default"
+                android:background="#181B20"
                 android:scaleType="centerCrop"
                 android:contentDescription="Avatar" />
             <ImageButton
@@ -35,43 +31,150 @@
                 android:src="@android:drawable/ic_menu_edit"
                 android:contentDescription="Edit Avatar" />
         </FrameLayout>
+
         <TextView
             android:id="@+id/nicknameText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nickname"
+            android:text="PlayerOne"
             android:textStyle="bold"
-            android:textSize="22sp"
-            android:textColor="@color/ga_neon_blue"
+            android:textSize="24sp"
+            android:textColor="#FFFFFF"
             android:layout_marginTop="8dp"
             style="@style/GameArenaHeading" />
 
-        <TextView
-            android:id="@+id/pointsText"
+        <!-- Rank and Join Date Row -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Points: 0"
-            android:textSize="18sp"
-            android:textColor="@color/ga_text_secondary"
-            android:layout_marginTop="4dp" />
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="4dp">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_trophy"
+                android:layout_marginEnd="4dp"
+                app:tint="#FFD700" />
+            <TextView
+                android:id="@+id/rankValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rank #42"
+                android:textColor="#b0b6c5"
+                android:textStyle="bold"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/joinDateValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" • Joined Jan 2023"
+                android:textColor="#b0b6c5"
+                android:textSize="16sp"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/levelText"
-            android:layout_width="wrap_content"
+        <!-- Stats Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Level: 1"
-            android:textSize="18sp"
-            android:textColor="@color/ga_neon_blue"
-            android:layout_marginTop="4dp" />
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp">
 
+            <!-- Games Played -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/gamesPlayedValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textColor="#FF6A36"
+                    android:gravity="center"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Games Played"
+                    android:textColor="#b0b6c5"
+                    android:textSize="15sp"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+            <!-- Win Rate -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/winRateValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0%"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textColor="#FF6A36"
+                    android:gravity="center"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Win Rate"
+                    android:textColor="#b0b6c5"
+                    android:textSize="15sp"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+            <!-- Total Points -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/totalPointsValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textColor="#FF6A36"
+                    android:gravity="center"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Points"
+                    android:textColor="#b0b6c5"
+                    android:textSize="15sp"
+                    android:gravity="center"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Achievements List -->
         <TextView
-            android:id="@+id/achievementsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Achievements:"
-            android:textSize="16sp"
+            android:text="Achievements"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="#FFFFFF"
             android:layout_marginTop="16dp"
-            android:textColor="@color/ga_neon_blue" />
+            android:layout_marginBottom="8dp" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/achievementsRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            android:layout_marginBottom="16dp"/>
 
     </LinearLayout>
 </ScrollView>

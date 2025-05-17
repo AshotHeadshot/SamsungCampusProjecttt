@@ -20,11 +20,10 @@ import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText editTextEmail, editTextPassword;
-    private Button buttonLogin;
-    private TextView textViewRegister;
-    private ProgressBar progressBar;
-    private FirebaseAuth mAuth;
+    private EditText emailInput, passwordInput;
+    private Button loginButton;
+    private TextView registerLink;
+    private FirebaseAuth mAuth; // ProgressBar removed, not in new layout
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,42 +32,41 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        editTextEmail = findViewById(R.id.editTextEmail);
-        editTextPassword = findViewById(R.id.editTextPassword);
-        buttonLogin = findViewById(R.id.buttonLogin);
-        textViewRegister = findViewById(R.id.textViewRegister);
-        progressBar = findViewById(R.id.progressBar);
+        emailInput = findViewById(R.id.email_input);
+        passwordInput = findViewById(R.id.password_input);
+        loginButton = findViewById(R.id.login_button);
+        registerLink = findViewById(R.id.register_link);
 
-        buttonLogin.setOnClickListener(v -> userLogin());
-        textViewRegister.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
+        loginButton.setOnClickListener(v -> userLogin());
+        registerLink.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
     }
 
     private void userLogin() {
-        String email = editTextEmail.getText().toString().trim();
-        String password = editTextPassword.getText().toString().trim();
+        String email = emailInput.getText().toString().trim();
+        String password = passwordInput.getText().toString().trim();
 
         if (email.isEmpty()) {
-            editTextEmail.setError("Email is required");
-            editTextEmail.requestFocus();
+            emailInput.setError("Email is required");
+            emailInput.requestFocus();
             return;
         }
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            editTextEmail.setError("Please enter a valid email");
-            editTextEmail.requestFocus();
+            emailInput.setError("Please enter a valid email");
+            emailInput.requestFocus();
             return;
         }
         if (password.isEmpty()) {
-            editTextPassword.setError("Password is required");
-            editTextPassword.requestFocus();
+            passwordInput.setError("Password is required");
+            passwordInput.requestFocus();
             return;
         }
         if (password.length() < 6) {
-            editTextPassword.setError("Minimum password length is 6 characters");
-            editTextPassword.requestFocus();
+            passwordInput.setError("Minimum password length is 6 characters");
+            passwordInput.requestFocus();
             return;
         }
 
-        progressBar.setVisibility(View.VISIBLE);
+        // No progressBar in new layout
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
@@ -119,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
                     } else {
                         Toast.makeText(LoginActivity.this, "Failed to login! Please check your credentials", Toast.LENGTH_LONG).show();
                     }
-                    progressBar.setVisibility(View.GONE);
+                    // No progressBar to hide
                 });
     }
 }

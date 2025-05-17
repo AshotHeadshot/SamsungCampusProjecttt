@@ -6,18 +6,30 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.View;
 import java.util.Random;
 import java.util.ArrayList;
 import com.example.gamearena.PointManager;
 import android.content.SharedPreferences;
 
 public class Game2048Activity extends AppCompatActivity {
+    // Bonus flags for 2048
+    private boolean bonus1024Given = false;
+    private boolean bonus2048Given = false;
 
     private static final int SIZE = 4;
     private int[][] board = new int[SIZE][SIZE];
     private TextView[][] cells = new TextView[SIZE][SIZE];
     private TextView scoreView;
+    private TextView bestTileView;
+    private android.widget.Button restartBtn;
     private int score = 0;
+    private int bestTile = 0;
+    private java.util.HashSet<Integer> notifiedMergeValues = new java.util.HashSet<>();
+    private int sessionPoints = 0;
+    private int sessionWins = 0;
+    private int sessionLosses = 0;
+    private int sessionDraws = 0;
     private GestureDetector gestureDetector;
 
     @Override
@@ -27,6 +39,13 @@ public class Game2048Activity extends AppCompatActivity {
 
         // Initialize UI elements
         scoreView = findViewById(R.id.score);
+        bestTileView = findViewById(R.id.bestTile);
+        restartBtn = findViewById(R.id.restartBtn);
+        restartBtn.setVisibility(View.GONE);
+        restartBtn.setOnClickListener(v -> {
+            restartBtn.setVisibility(View.GONE);
+            startNewGame();
+        });
         cells[0][0] = findViewById(R.id.cell00);
         cells[0][1] = findViewById(R.id.cell01);
         cells[0][2] = findViewById(R.id.cell02);
@@ -65,10 +84,13 @@ public class Game2048Activity extends AppCompatActivity {
                 updateCell(i, j);
             }
         }
-
+        bestTile = 0;
+        updateBestTile();
         score = 0;
         updateScore();
-
+        restartBtn.setVisibility(View.GONE);
+        bonus1024Given = false;
+        bonus2048Given = false;
         // Add two initial tiles
         addRandomTile();
         addRandomTile();
@@ -124,6 +146,8 @@ public class Game2048Activity extends AppCompatActivity {
 
     private void updateScore() {
         scoreView.setText("Score: " + score);
+        updateBestTile();
+        bestTileView.setText("Best tile: " + bestTile);
     }
 
     private boolean moveTiles(int direction) {
@@ -161,13 +185,9 @@ public class Game2048Activity extends AppCompatActivity {
             addRandomTile();
             updateBoard();
             updateScore();
-            updateBestTile();
 
-            if (hasReached2048()) {
-                Toast.makeText(this, "You Win!", Toast.LENGTH_LONG).show();
-            }
-            if (isGameOver()) {
-                Toast.makeText(this, "Game Over!", Toast.LENGTH_LONG).show();
+            if (hasReached2048() || isGameOver()) {
+                restartBtn.setVisibility(View.VISIBLE);
             }
         }
         return moved;
@@ -224,33 +244,51 @@ public class Game2048Activity extends AppCompatActivity {
             System.arraycopy(board[i], 0, row, 0, SIZE);
 
             row = moveAndMerge(row);
-
             System.arraycopy(row, 0, board[i], 0, SIZE);
         }
     }
 
+    // Restored moveAndMerge method
     private int[] moveAndMerge(int[] line) {
         int[] newLine = new int[SIZE];
         int position = 0;
-
-        // First, move all non-zero elements to the front
+        // Move non-zero elements to the front
         for (int num : line) {
             if (num != 0) {
                 newLine[position++] = num;
             }
         }
-
-        // Then merge adjacent equal numbers
+        // Merge adjacent equal numbers
         for (int i = 0; i < SIZE - 1; i++) {
             if (newLine[i] != 0 && newLine[i] == newLine[i + 1]) {
                 int mergedValue = newLine[i] * 2;
                 newLine[i] = mergedValue;
-                PointManager.getInstance().add2048Merge();
-                if (mergedValue == 128 || mergedValue == 256 || mergedValue == 512 || mergedValue == 1024 || mergedValue == 2048) {
-                    PointManager.getInstance().add2048Tile(mergedValue);
+                sessionPoints += 1; // +1 per merge
+                if (!notifiedMergeValues.contains(mergedValue)) {
+                    showShortToast("+1 point");
+                    notifiedMergeValues.add(mergedValue);
                 }
-                updatePointsUIAndSync();
                 score += mergedValue;
+                PointManager.getInstance().applySessionPoints(this, 1, 0, 0, 0);
+                PointManager.getInstance().syncPoints(this);
+                // +10 for first 1024 tile
+                if (mergedValue == 1024 && !bonus1024Given) {
+                    sessionPoints += 10;
+                    PointManager.getInstance().applySessionPoints(this, 10, 0, 0, 0);
+                    PointManager.getInstance().syncPoints(this);
+                    showShortToast("+10 bonus for 1024!");
+                    bonus1024Given = true;
+                }
+                // +20 for first 2048 tile
+                if (mergedValue == 2048 && !bonus2048Given) {
+                    sessionPoints += 20;
+                    PointManager.getInstance().applySessionPoints(this, 20, 0, 0, 0);
+                    PointManager.getInstance().syncPoints(this);
+                    showShortToast("+20 bonus for 2048!");
+                    bonus2048Given = true;
+                }
+                // Immediately sync points when earned
+                PointManager.getInstance().applySessionPoints(this, sessionPoints, sessionWins, sessionLosses, sessionDraws);
                 // Shift the rest of the array left
                 for (int j = i + 1; j < SIZE - 1; j++) {
                     newLine[j] = newLine[j + 1];
@@ -258,7 +296,6 @@ public class Game2048Activity extends AppCompatActivity {
                 newLine[SIZE - 1] = 0;
             }
         }
-
         return newLine;
     }
 
@@ -270,19 +307,14 @@ public class Game2048Activity extends AppCompatActivity {
         }
     }
 
-    private void updatePointsUIAndSync() {
-        int points = PointManager.getInstance().getPoints();
-        scoreView.setText("Points: " + points);
-        PointManager.getInstance().syncPoints(this);
-    }
-
     private void updateBestTile() {
-        int bestTile = 0;
+        int newBest = 0;
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
-                if (board[i][j] > bestTile) bestTile = board[i][j];
+                if (board[i][j] > newBest) newBest = board[i][j];
             }
         }
+        bestTile = newBest;
         android.content.SharedPreferences prefs = getSharedPreferences("user_prefs", MODE_PRIVATE);
         if (bestTile > prefs.getInt("2048_best_tile", 0)) {
             android.content.SharedPreferences.Editor editor = prefs.edit();
@@ -293,6 +325,10 @@ public class Game2048Activity extends AppCompatActivity {
             editor.apply();
         }
     }
+
+    // Restored showEndGameSummaryDialog method
+    // Dialog removed, handled by restart button UI
+    
 
     private boolean hasReached2048() {
         for (int i = 0; i < SIZE; i++) {
@@ -366,5 +402,11 @@ public class Game2048Activity extends AppCompatActivity {
             }
             return result;
         }
+    }
+
+    private void showShortToast(String message) {
+        final Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+        toast.show();
+        new android.os.Handler().postDelayed(toast::cancel, 1000);
     }
 }

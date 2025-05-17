@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:padding="24dp"
-    android:background="@color/ga_bg_dark">
+    android:background="#181B20">
 
     <!-- Timer at top right -->
     <RelativeLayout
@@ -18,12 +18,19 @@
             android:layout_height="wrap_content"
             android:text="10"
             android:textSize="20sp"
-            android:textColor="@color/ga_neon_blue"
+            android:textColor="@color/white"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="8dp"
-            android:layout_marginTop="8dp"
-            style="@style/GameArenaHeading"/>
+            android:layout_marginTop="8dp"/>
     </RelativeLayout>
+    <TextView
+        android:id="@+id/scoreText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Score: 0"
+        android:textSize="18sp"
+        android:layout_marginBottom="12dp"
+        android:textColor="@color/ga_text_primary"/>
 
     <!-- Question Card -->
     <androidx.cardview.widget.CardView
@@ -142,21 +149,16 @@
         android:textColor="@color/ga_text_secondary"
         android:layout_marginBottom="16dp"/>
 
-    <TextView
-        android:id="@+id/scoreText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Score: 0"
-        android:textSize="18sp"
-        android:layout_marginBottom="12dp"
-        android:textColor="@color/ga_text_primary"/>
 
     <Button
         android:id="@+id/finishBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Finish"
-        style="@style/GameArenaButton"
-        android:visibility="gone"/>
+        android:visibility="gone"
+
+        android:layout_margin="8dp"
+        android:textColor="@color/white"
+        android:backgroundTint="#5396FF"/>
 
 </LinearLayout>

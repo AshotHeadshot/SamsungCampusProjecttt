@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/ga_bg_dark">
+    android:background="#181B20">
 
     <!-- Player Score (Top Left) -->
     <TextView
@@ -60,7 +60,7 @@
         android:textColor="@color/ga_text_primary"
         style="@style/GameArenaHeading"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="60dp"
         android:layout_below="@id/playerLabel"/>
 
     <!-- Hands -->
@@ -72,7 +72,7 @@
         android:gravity="center"
         android:layout_below="@id/statusText"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp">
+        android:layout_marginTop="60dp">
         <ImageView
             android:id="@+id/playerHand"
             android:layout_width="100dp"
@@ -99,28 +99,31 @@
         android:gravity="center"
         android:layout_below="@id/handsRow"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp">
+        android:layout_marginTop="60dp">
         <Button
             android:id="@+id/rockBtn"
-            android:layout_width="100dp"
-            android:layout_height="48dp"
-            android:text="rock"
-            style="@style/GameArenaButton"
-            android:layout_margin="8dp"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ROCK"
+            android:layout_margin="8dp"
+            android:textColor="@color/white"
+            android:backgroundTint="#5396FF"/>
         <Button
             android:id="@+id/paperBtn"
-            android:layout_width="100dp"
-            android:layout_height="48dp"
-            android:text="paper"
-            style="@style/GameArenaButton"
-            android:layout_margin="8dp"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PAPER"
+            android:layout_margin="8dp"
+            android:textColor="@color/white"
+            android:backgroundTint="#5396FF"/>
         <Button
             android:id="@+id/scissorsBtn"
-            android:layout_width="100dp"
-            android:layout_height="48dp"
-            android:text="scissors"
-            style="@style/GameArenaButton"
-            android:layout_margin="8dp"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SCISSORS"
+            android:layout_margin="8dp"
+            android:textColor="@color/white"
+            android:backgroundTint="#5396FF"/>
     </LinearLayout>
 
     <!-- Result -->
@@ -129,7 +132,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18sp"
-        android:textColor="@color/ga_text_secondary"
+        android:textColor="#181B20"
         android:layout_below="@id/buttonsRow"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp"
@@ -141,10 +144,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Play Again"
-        style="@style/GameArenaButton"
         android:layout_below="@id/resultText"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
+        android:layout_margin="8dp"
+        android:textColor="@color/white"
+        android:backgroundTint="#5396FF"
         android:visibility="gone"/>
 
 </RelativeLayout>

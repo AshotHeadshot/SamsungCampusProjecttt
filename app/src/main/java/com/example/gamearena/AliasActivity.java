@@ -15,12 +15,18 @@ public class AliasActivity extends AppCompatActivity {
     };
     private int currentIdx = 0;
     private TextView wordText, resultText, timerText, scoreText;
+    private TextView team1ScoreText, team2ScoreText; // Team scores
     private Button correctBtn, skipBtn, startBtn;
     private Random random = new Random();
     private int score = 0;
+    private int team1Score = 0;
+    private int team2Score = 0;
+    private int currentTeam = 1; // 1 or 2
     private CountDownTimer timer;
     private boolean gameActive = false;
     private int roundTime = 60; // seconds
+    private int totalRounds = 2;
+    private int roundCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +38,24 @@ public class AliasActivity extends AppCompatActivity {
         skipBtn = findViewById(R.id.skipBtn);
         timerText = findViewById(R.id.timerText);
         scoreText = findViewById(R.id.scoreText);
+        team1ScoreText = findViewById(R.id.team1ScoreText);
+        team2ScoreText = findViewById(R.id.team2ScoreText);
         startBtn = findViewById(R.id.startBtn);
         setGameState(false);
 
         startBtn.setOnClickListener(v -> startGame());
         correctBtn.setOnClickListener(v -> {
             if (!gameActive) return;
+            if (currentTeam == 1) {
+                team1Score++;
+                team1ScoreText.setText("Team 1: " + team1Score);
+            } else {
+                team2Score++;
+                team2ScoreText.setText("Team 2: " + team2Score);
+            }
             score++;
             scoreText.setText("Score: " + score);
-            resultText.setText("Correct!");
+            resultText.setText("Correct! Team " + currentTeam + " scored!");
             resultText.setTextColor(0xFF388E3C);
             showNewWord();
         });
@@ -53,6 +68,17 @@ public class AliasActivity extends AppCompatActivity {
 
     private void startGame() {
         score = 0;
+        team1Score = 0;
+        team2Score = 0;
+        currentTeam = 1;
+        roundCount = 1;
+        if (team1ScoreText != null) team1ScoreText.setText("Team 1: 0");
+        if (team2ScoreText != null) team2ScoreText.setText("Team 2: 0");
+        resultText.setText("Team 1's turn!");
+        startTeamRound();
+    }
+
+    private void startTeamRound() {
         setGameState(true);
         showNewWord();
         timer = new CountDownTimer(roundTime * 1000, 1000) {
@@ -61,7 +87,17 @@ public class AliasActivity extends AppCompatActivity {
             }
             public void onFinish() {
                 setGameState(false);
-                resultText.setText("Time's up! Score: " + score);
+                if (roundCount < totalRounds) {
+                    // Switch team
+                    currentTeam = (currentTeam == 1) ? 2 : 1;
+                    roundCount++;
+                    resultText.setText("Time's up! Now Team " + currentTeam + "'s turn!");
+                    // Start next team after short delay
+                    timerText.postDelayed(() -> startTeamRound(), 2000);
+                } else {
+                    // Game over, show both scores
+                    resultText.setText("Game Over!\nTeam 1: " + team1Score + "\nTeam 2: " + team2Score);
+                }
             }
         }.start();
     }

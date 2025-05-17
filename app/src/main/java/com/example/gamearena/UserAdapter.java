@@ -33,11 +33,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         User user = users.get(position);
         holder.positionText.setText(String.valueOf(position + 1));
         holder.nicknameText.setText(user.nickname);
-        holder.pointsText.setText(user.points + " pts");
+        holder.pointsText.setText(String.valueOf(user.points));
+        holder.gamesText.setText(String.valueOf(user.games));
+        holder.winRateText.setText(String.format("%.1f%%", user.winRate));
         if (user.avatarUri != null && !user.avatarUri.isEmpty()) {
             holder.avatarImage.setImageURI(Uri.parse(user.avatarUri));
         } else {
-            holder.avatarImage.setImageResource(android.R.drawable.sym_def_app_icon);
+            holder.avatarImage.setImageResource(R.drawable.ic_profile_default);
         }
         // Color code medals
         int color;
@@ -45,10 +47,32 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             case 0: color = 0xFFFFD700; break; // Gold
             case 1: color = 0xFFC0C0C0; break; // Silver
             case 2: color = 0xFFCD7F32; break; // Bronze
-            default: color = 0xFF111111; break; // Black
+            default: color = 0xFFFFFFFF; break; // White
         }
-        holder.nicknameText.setTextColor(color);
-        holder.positionText.setTextColor(color);
+        String currentUid = com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser() != null ? com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser().getUid() : "";
+        // Priority: top 3 always medal color, else neon blue if current user, else white
+        boolean isCurrentUser = user.uid != null && user.uid.equals(currentUid);
+        // Rank color: always medal for top 3, else white
+        if (position < 3) {
+            holder.positionText.setTextColor(color);
+            holder.positionText.setTypeface(null, android.graphics.Typeface.BOLD);
+            holder.nicknameText.setTextColor(color);
+            holder.nicknameText.setTypeface(null, android.graphics.Typeface.BOLD);
+        } else {
+            holder.positionText.setTextColor(0xFFFFFFFF); // White
+            holder.positionText.setTypeface(null, android.graphics.Typeface.NORMAL);
+            holder.nicknameText.setTextColor(0xFFFFFFFF); // White
+            holder.nicknameText.setTypeface(null, android.graphics.Typeface.NORMAL);
+        }
+        // Row highlight for current user
+        if (isCurrentUser) {
+            holder.itemView.setBackgroundColor(0xAA222A3A); // Subtle gray-blue highlight
+        } else {
+            holder.itemView.setBackgroundColor(0x00000000); // Transparent
+        }
+
+
+
     }
 
     @Override
@@ -58,13 +82,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     static class UserViewHolder extends RecyclerView.ViewHolder {
         ImageView avatarImage;
-        TextView positionText, nicknameText, pointsText;
+        TextView positionText, nicknameText, pointsText, gamesText, winRateText;
         UserViewHolder(View itemView) {
             super(itemView);
             avatarImage = itemView.findViewById(R.id.avatarImage);
             positionText = itemView.findViewById(R.id.positionText);
             nicknameText = itemView.findViewById(R.id.nicknameText);
             pointsText = itemView.findViewById(R.id.pointsText);
+            gamesText = itemView.findViewById(R.id.gamesText);
+            winRateText = itemView.findViewById(R.id.winRateText);
         }
     }
 }

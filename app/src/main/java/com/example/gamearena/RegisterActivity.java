@@ -20,11 +20,10 @@ import com.google.firebase.database.ValueEventListener;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText editTextEmail, editTextPassword, editTextConfirmPassword, editTextNickname;
-    private Button buttonRegister;
-    private TextView textViewLogin;
-    private ProgressBar progressBar;
-    private FirebaseAuth mAuth;
+    private EditText emailInput, nicknameInput, passwordInput, confirmPasswordInput;
+    private Button registerButton;
+    private TextView loginLink;
+    private FirebaseAuth mAuth; // ProgressBar removed, not in new layout
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,56 +32,55 @@ public class RegisterActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        editTextEmail = findViewById(R.id.editTextEmail);
-        editTextNickname = findViewById(R.id.editTextNickname);
-        editTextPassword = findViewById(R.id.editTextPassword);
-        editTextConfirmPassword = findViewById(R.id.editTextConfirmPassword);
-        buttonRegister = findViewById(R.id.buttonRegister);
-        textViewLogin = findViewById(R.id.textViewLogin);
-        progressBar = findViewById(R.id.progressBar);
+        emailInput = findViewById(R.id.email_input);
+        nicknameInput = findViewById(R.id.nickname_input);
+        passwordInput = findViewById(R.id.password_input);
+        confirmPasswordInput = findViewById(R.id.confirm_password_input);
+        registerButton = findViewById(R.id.register_button);
+        loginLink = findViewById(R.id.login_link);
 
-        buttonRegister.setOnClickListener(v -> registerUser());
-        textViewLogin.setOnClickListener(v -> startActivity(new Intent(RegisterActivity.this, LoginActivity.class)));
+        registerButton.setOnClickListener(v -> registerUser());
+        loginLink.setOnClickListener(v -> startActivity(new Intent(RegisterActivity.this, LoginActivity.class)));
     }
 
     private void registerUser() {
-        String email = editTextEmail.getText().toString().trim();
-        String nickname = editTextNickname.getText().toString().trim();
-        String password = editTextPassword.getText().toString().trim();
-        String confirmPassword = editTextConfirmPassword.getText().toString().trim();
+        String email = emailInput.getText().toString().trim();
+        String nickname = nicknameInput.getText().toString().trim();
+        String password = passwordInput.getText().toString().trim();
+        String confirmPassword = confirmPasswordInput.getText().toString().trim();
 
         if (email.isEmpty()) {
-            editTextEmail.setError("Email is required");
-            editTextEmail.requestFocus();
+            emailInput.setError("Email is required");
+            emailInput.requestFocus();
             return;
         }
         if (nickname.isEmpty()) {
-            editTextNickname.setError("Nickname is required");
-            editTextNickname.requestFocus();
+            nicknameInput.setError("Nickname is required");
+            nicknameInput.requestFocus();
             return;
         }
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            editTextEmail.setError("Please enter a valid email");
-            editTextEmail.requestFocus();
+            emailInput.setError("Please enter a valid email");
+            emailInput.requestFocus();
             return;
         }
         if (password.isEmpty()) {
-            editTextPassword.setError("Password is required");
-            editTextPassword.requestFocus();
+            passwordInput.setError("Password is required");
+            passwordInput.requestFocus();
             return;
         }
         if (password.length() < 6) {
-            editTextPassword.setError("Minimum password length is 6 characters");
-            editTextPassword.requestFocus();
+            passwordInput.setError("Minimum password length is 6 characters");
+            passwordInput.requestFocus();
             return;
         }
         if (!password.equals(confirmPassword)) {
-            editTextConfirmPassword.setError("Passwords do not match");
-            editTextConfirmPassword.requestFocus();
+            confirmPasswordInput.setError("Passwords do not match");
+            confirmPasswordInput.requestFocus();
             return;
         }
 
-        progressBar.setVisibility(View.VISIBLE);
+        // No progressBar in new layout
 
         // Check if nickname is already used
         FirebaseDatabase.getInstance().getReference("users").orderByChild("nickname").equalTo(nickname)
@@ -90,9 +88,8 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot snapshot) {
                     if (snapshot.exists()) {
-                        editTextNickname.setError("This nickname is already taken!");
-                        editTextNickname.requestFocus();
-                        progressBar.setVisibility(View.GONE);
+                        nicknameInput.setError("This nickname is already taken!");
+                        nicknameInput.requestFocus();
                         return;
                     } else {
                         // Continue with registration as before
@@ -102,7 +99,6 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void onCancelled(DatabaseError error) {
                     Toast.makeText(RegisterActivity.this, "Error checking nickname", Toast.LENGTH_SHORT).show();
-                    progressBar.setVisibility(View.GONE);
                 }
             });
     }
@@ -130,7 +126,6 @@ public class RegisterActivity extends AppCompatActivity {
                         sendEmailVerification(user);
                     } else {
                         Toast.makeText(RegisterActivity.this, "Registration failed! Please try again", Toast.LENGTH_LONG).show();
-                        progressBar.setVisibility(View.GONE);
                     }
                 });
     }
@@ -151,7 +146,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 "Failed to send verification email: " + task.getException().getMessage(),
                                 Toast.LENGTH_LONG).show();
                     }
-                    progressBar.setVisibility(View.GONE);
+    
                 });
     }
 }

@@ -10,5 +10,14 @@ public class User {
     public int draws;
     public int losses;
     public String avatarUri; // URI or resource name
-    // Add more fields as needed
+    public String uid; // Firebase UID
+
+    // Computed fields for leaderboard
+    public int games;
+    public double winRate;
+
+    public void computeStats() {
+        games = wins + losses + draws;
+        winRate = games > 0 ? (wins * 100.0) / games : 0.0;
+    }
 }

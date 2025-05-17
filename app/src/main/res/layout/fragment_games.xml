@@ -1,175 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/ga_bg_dark"
+    android:orientation="vertical"
+    android:background="#181B20"
     android:padding="24dp">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/gamesTitle"
+        android:text="Games"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"/>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        app:tabIndicatorColor="#FF5C1D"
+        app:tabSelectedTextColor="#FF5C1D"
+        app:tabTextColor="#606060"
+        android:background="#181B20"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ranked Games"
-            style="@style/GameArenaHeading"
-            android:layout_marginBottom="8dp"/>
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
-        <ImageButton
-            android:id="@+id/rockPaperScissorsBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/rock_paper_scissors_vs_bot"
-            android:background="@android:color/transparent"
-            android:contentDescription="Rock-Paper-Scissors vs Bot"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"
-            android:layout_marginBottom="8dp"/>
+</LinearLayout>
 
-        <ImageButton
-            android:id="@+id/quickMathBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/quick_math_challenge_logo"
-            android:background="@android:color/transparent"
-            android:contentDescription="Quick Math Challenge"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"
-            android:layout_marginBottom="8dp"/>
-
-        <ImageButton
-            android:id="@+id/snakeBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/snake_logo"
-            android:background="@android:color/transparent"
-            android:contentDescription="Snake"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"
-            android:layout_marginBottom="8dp"/>
-
-        <ImageButton
-            android:id="@+id/game2048Btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/game_2048_logo"
-            android:background="@android:color/transparent"
-            android:contentDescription="2048"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"
-            android:layout_marginBottom="8dp"/>
-
-        <ImageButton
-            android:id="@+id/PingPongvsBlocksBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ping_pong_vs_blocks_logo"
-            android:background="@android:color/transparent"
-            android:contentDescription="2048"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"
-            android:layout_marginBottom="8dp"/>
-
-
-        <ImageButton
-            android:id="@+id/ticTacToeBotBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/tictactoe_vs_bot_logo"
-            android:background="@android:color/transparent"
-            android:contentDescription="TicTacToe vs Bot"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"
-            android:layout_marginBottom="16dp"/>
-
-        <ImageButton
-            android:id="@+id/TowerBlockBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/tower_block_logo"
-            android:background="@android:color/transparent"
-            android:contentDescription="Tower Block"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"
-            android:layout_marginBottom="16dp"/>
-
-        <ImageButton
-            android:id="@+id/ImposterColorBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/imposter_color_logo"
-            android:background="@android:color/transparent"
-            android:contentDescription="Imposter Color"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"
-            android:layout_marginBottom="16dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Unranked Games"
-            style="@style/GameArenaHeading"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="8dp"/>
-
-        <ImageButton
-            android:id="@+id/ticTacToeBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/tictactoe_pvp_logo"
-            android:background="@android:color/transparent"
-            android:contentDescription="TicTacToe (Player vs Player)"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"
-            android:layout_marginBottom="12dp"/>
-
-        <ImageButton
-            android:id="@+id/wordScrambleBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/word_scramble_logo"
-            android:background="@android:color/transparent"
-            android:contentDescription="TicTacToe (Player vs Player)"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"
-            android:layout_marginBottom="12dp"/>
-
-        <ImageButton
-            android:id="@+id/aliasBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/alias_logo"
-            android:background="@android:color/transparent"
-            android:contentDescription="Alias"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"
-            android:layout_marginBottom="12dp"/>
-
-        <ImageButton
-            android:id="@+id/fasttypingBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/fast_typing_logo"
-            android:background="@android:color/transparent"
-            android:contentDescription="Fast Typing Challange"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"
-            android:layout_marginBottom="12dp"/>
-
-
-        <ImageButton
-            android:id="@+id/PingPong"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ping_pong_logo"
-            android:background="@android:color/transparent"
-            android:contentDescription="Ping Pong"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"
-            android:layout_marginBottom="12dp"/>
-
-    </LinearLayout>
-</ScrollView>

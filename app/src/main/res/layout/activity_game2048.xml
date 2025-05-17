@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@color/ga_bg_dark"
+    android:background="#181B20"
     tools:context=".Game2048Activity">
 
     <TextView
@@ -26,7 +26,17 @@
         android:textSize="24sp"
         android:textColor="@color/ga_text_secondary"
         android:gravity="center"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="4dp"/>
+
+    <TextView
+        android:id="@+id/bestTile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Best tile: 0"
+        android:textSize="18sp"
+        android:textColor="@color/ga_neon_blue"
+        android:gravity="center"
+        android:layout_marginBottom="12dp"/>
 
     <GridLayout
         android:layout_width="match_parent"
@@ -47,8 +57,8 @@
             android:gravity="center"
             android:textSize="32sp"
             android:textStyle="bold"
-            android:background="@color/ga_bg_dark"
-            android:textColor="@color/ga_text_primary"/>
+            android:background="#181B20"
+            android:textColor="#181B20"/>
 
         <TextView
             android:id="@+id/cell01"
@@ -60,8 +70,8 @@
             android:gravity="center"
             android:textSize="32sp"
             android:textStyle="bold"
-            android:background="@color/ga_bg_dark"
-            android:textColor="@color/ga_text_primary"/>
+            android:background="#181B20"
+            android:textColor="#181B20"/>
 
         <TextView
             android:id="@+id/cell02"
@@ -73,8 +83,8 @@
             android:gravity="center"
             android:textSize="32sp"
             android:textStyle="bold"
-            android:background="@color/ga_bg_dark"
-            android:textColor="@color/ga_text_primary"/>
+            android:background="#181B20"
+            android:textColor="#181B20"/>
 
         <TextView
             android:id="@+id/cell03"
@@ -86,8 +96,8 @@
             android:gravity="center"
             android:textSize="32sp"
             android:textStyle="bold"
-            android:background="@color/ga_bg_dark"
-            android:textColor="@color/ga_text_primary"/>
+            android:background="#181B20"
+            android:textColor="#181B20"/>
 
         <TextView
             android:id="@+id/cell10"
@@ -99,8 +109,8 @@
             android:gravity="center"
             android:textSize="32sp"
             android:textStyle="bold"
-            android:background="@color/ga_bg_dark"
-            android:textColor="@color/ga_text_primary"/>
+            android:background="#181B20"
+            android:textColor="#181B20"/>
 
         <TextView
             android:id="@+id/cell11"
@@ -112,8 +122,8 @@
             android:gravity="center"
             android:textSize="32sp"
             android:textStyle="bold"
-            android:background="@color/ga_bg_dark"
-            android:textColor="@color/ga_text_primary"/>
+            android:background="#181B20"
+            android:textColor="#181B20"/>
 
         <TextView
             android:id="@+id/cell12"
@@ -125,8 +135,8 @@
             android:gravity="center"
             android:textSize="32sp"
             android:textStyle="bold"
-            android:background="@color/ga_bg_dark"
-            android:textColor="@color/ga_text_primary"/>
+            android:background="#181B20"
+            android:textColor="#181B20"/>
 
         <TextView
             android:id="@+id/cell13"
@@ -138,8 +148,8 @@
             android:gravity="center"
             android:textSize="32sp"
             android:textStyle="bold"
-            android:background="@color/ga_bg_dark"
-            android:textColor="@color/ga_text_primary"/>
+            android:background="#181B20"
+            android:textColor="#181B20"/>
 
         <TextView
             android:id="@+id/cell20"
@@ -151,8 +161,8 @@
             android:gravity="center"
             android:textSize="32sp"
             android:textStyle="bold"
-            android:background="@color/ga_bg_dark"
-            android:textColor="@color/ga_text_primary"/>
+            android:background="#181B20"
+            android:textColor="#181B20"/>
 
         <TextView
             android:id="@+id/cell21"
@@ -164,8 +174,8 @@
             android:gravity="center"
             android:textSize="32sp"
             android:textStyle="bold"
-            android:background="@color/ga_bg_dark"
-            android:textColor="@color/ga_text_primary"/>
+            android:background="#181B20"
+            android:textColor="#181B20"/>
 
         <TextView
             android:id="@+id/cell22"
@@ -177,8 +187,8 @@
             android:gravity="center"
             android:textSize="32sp"
             android:textStyle="bold"
-            android:background="@color/ga_bg_dark"
-            android:textColor="@color/ga_text_primary"/>
+            android:background="#181B20"
+            android:textColor="#181B20"/>
 
         <TextView
             android:id="@+id/cell23"
@@ -190,8 +200,8 @@
             android:gravity="center"
             android:textSize="32sp"
             android:textStyle="bold"
-            android:background="@color/ga_bg_dark"
-            android:textColor="@color/ga_text_primary"/>
+            android:background="#181B20"
+            android:textColor="#181B20"/>
 
         <TextView
             android:id="@+id/cell30"
@@ -203,8 +213,8 @@
             android:gravity="center"
             android:textSize="32sp"
             android:textStyle="bold"
-            android:background="@color/ga_bg_dark"
-            android:textColor="@color/ga_text_primary"/>
+            android:background="#181B20"
+            android:textColor="#181B20"/>
 
         <TextView
             android:id="@+id/cell31"
@@ -216,8 +226,8 @@
             android:gravity="center"
             android:textSize="32sp"
             android:textStyle="bold"
-            android:background="@color/ga_bg_dark"
-            android:textColor="@color/ga_text_primary"/>
+            android:background="#181B20"
+            android:textColor="#181B20"/>
 
         <TextView
             android:id="@+id/cell32"
@@ -229,8 +239,8 @@
             android:gravity="center"
             android:textSize="32sp"
             android:textStyle="bold"
-            android:background="@color/ga_bg_dark"
-            android:textColor="@color/ga_text_primary"/>
+            android:background="#181B20"
+            android:textColor="#181B20"/>
 
         <TextView
             android:id="@+id/cell33"
@@ -242,17 +252,20 @@
             android:gravity="center"
             android:textSize="32sp"
             android:textStyle="bold"
-            android:background="@color/ga_bg_dark"
-            android:textColor="@color/ga_text_primary"/>
+            android:background="#181B20"
+            android:textColor="#181B20"/>
     </GridLayout>
 
     <Button
+        android:id="@+id/restartBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Game"
-        style="@style/GameArenaButton"
-        android:layout_gravity="center_horizontal"
+        android:text="Restart"
+        android:visibility="gone"
+        android:layout_gravity="center"
         android:layout_marginTop="16dp"
-        android:onClick="onNewGameClick"/>
+        android:layout_margin="8dp"
+        android:textColor="@color/white"
+        android:backgroundTint="#5396FF"/>
 
 </LinearLayout>

@@ -40,6 +40,8 @@ public class LeaderboardFragment extends Fragment {
                     for (DataSnapshot userSnap : snapshot.getChildren()) {
                         User user = userSnap.getValue(User.class);
                         if (user != null) {
+                            user.uid = userSnap.getKey();
+                            user.computeStats();
                             users.add(user);
                         }
                     }

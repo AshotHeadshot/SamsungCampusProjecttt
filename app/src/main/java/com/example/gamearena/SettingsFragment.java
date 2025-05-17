@@ -32,12 +32,24 @@ public class SettingsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
         Button logoutBtn = view.findViewById(R.id.logoutBtn);
         Button deleteAccountBtn = view.findViewById(R.id.deleteAccountBtn);
-        Button resetProgressBtn = view.findViewById(R.id.resetProgressBtn);
         Button saveNicknameBtn = view.findViewById(R.id.saveNicknameBtn);
         Button deleteAvatarBtn = view.findViewById(R.id.deleteAvatarBtn);
+        Button rankedGamesInfoBtn = view.findViewById(R.id.rankedGamesInfoBtn);
         nicknameEdit = view.findViewById(R.id.nicknameEdit);
         TextView versionText = view.findViewById(R.id.versionText);
         TextView creditsText = view.findViewById(R.id.creditsText);
+
+        rankedGamesInfoBtn.setOnClickListener(v -> {
+            new AlertDialog.Builder(getContext())
+                .setTitle("Ranked Games & Points Info")
+                .setMessage("\u2022 Ranked games contribute to your leaderboard position.\n\n" +
+                        "\u2022 Points are earned for each win, and may be lost for defeats.\n\n" +
+                        "\u2022 Your Win/Loss/Draw record is tracked for each ranked game.\n\n" +
+                        "\u2022 The more you win, the higher your rank and points!\n\n" +
+                        "\u2022 Cheating or leaving games early may result in penalties.")
+                .setPositiveButton("OK", null)
+                .show();
+        });
 
         SharedPreferences prefs = requireContext().getSharedPreferences("user_prefs", 0);
         nicknameEdit.setText(prefs.getString("nickname", ""));
@@ -99,19 +111,6 @@ public class SettingsFragment extends Fragment {
                     .child(uid).child("avatarUri").removeValue();
             }
             Toast.makeText(getContext(), "Avatar deleted!", Toast.LENGTH_SHORT).show();
-        });
-
-        // Reset Progress
-        resetProgressBtn.setOnClickListener(v -> {
-            new AlertDialog.Builder(getContext())
-                .setTitle("Reset Progress")
-                .setMessage("Are you sure you want to reset all points and stats? This cannot be undone.")
-                .setPositiveButton("Yes", (dialog, which) -> {
-                    prefs.edit().clear().apply();
-                    Toast.makeText(getContext(), "Progress reset!", Toast.LENGTH_SHORT).show();
-                })
-                .setNegativeButton("No", null)
-                .show();
         });
 
         // Log out logic
