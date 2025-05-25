@@ -263,32 +263,22 @@ public class Game2048Activity extends AppCompatActivity {
             if (newLine[i] != 0 && newLine[i] == newLine[i + 1]) {
                 int mergedValue = newLine[i] * 2;
                 newLine[i] = mergedValue;
-                sessionPoints += 1; // +1 per merge
-                if (!notifiedMergeValues.contains(mergedValue)) {
+                // Only award +1 point for the first time each of these tiles is created
+                int[] milestoneTiles = {4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048};
+                boolean isMilestone = false;
+                for (int val : milestoneTiles) {
+                    if (mergedValue == val) {
+                        isMilestone = true;
+                        break;
+                    }
+                }
+                if (isMilestone && !notifiedMergeValues.contains(mergedValue)) {
                     showShortToast("+1 point");
                     notifiedMergeValues.add(mergedValue);
+                    PointManager.getInstance().applySessionPoints(this, 1, 0, 0, 0);
+                    PointManager.getInstance().syncPoints(this);
                 }
                 score += mergedValue;
-                PointManager.getInstance().applySessionPoints(this, 1, 0, 0, 0);
-                PointManager.getInstance().syncPoints(this);
-                // +10 for first 1024 tile
-                if (mergedValue == 1024 && !bonus1024Given) {
-                    sessionPoints += 10;
-                    PointManager.getInstance().applySessionPoints(this, 10, 0, 0, 0);
-                    PointManager.getInstance().syncPoints(this);
-                    showShortToast("+10 bonus for 1024!");
-                    bonus1024Given = true;
-                }
-                // +20 for first 2048 tile
-                if (mergedValue == 2048 && !bonus2048Given) {
-                    sessionPoints += 20;
-                    PointManager.getInstance().applySessionPoints(this, 20, 0, 0, 0);
-                    PointManager.getInstance().syncPoints(this);
-                    showShortToast("+20 bonus for 2048!");
-                    bonus2048Given = true;
-                }
-                // Immediately sync points when earned
-                PointManager.getInstance().applySessionPoints(this, sessionPoints, sessionWins, sessionLosses, sessionDraws);
                 // Shift the rest of the array left
                 for (int j = i + 1; j < SIZE - 1; j++) {
                     newLine[j] = newLine[j + 1];
