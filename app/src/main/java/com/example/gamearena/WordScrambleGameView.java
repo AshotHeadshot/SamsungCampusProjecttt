@@ -1,4 +1,4 @@
-package com.example.gamearena;
+// DELETED
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -30,10 +30,7 @@ public class WordScrambleGameView extends SurfaceView implements Runnable {
             "ANDROID", "KOTLIN", "JAVA", "SURFACE", "BUTTON", "ACTIVITY", "FRAGMENT", "LAYOUT", "WIDGET", "CANVAS",
             "OBJECT", "STRING", "METHOD", "VARIABLE", "PROJECT", "PACKAGE", "IMPORT", "RETURN", "STATIC", "PUBLIC",
             "MOBILE", "DEVELOPER", "APPLICATION", "RESOURCE", "MANIFEST", "GRADLE", "DEBUG", "RELEASE", "EMULATOR", "DEVICE",
-            // Sentences
-            "Hello World", "Android is awesome", "I love coding", "Java is powerful", "Kotlin is modern",
-            "SurfaceView is cool", "Fragments manage UI", "Layouts define structure", "Debug your code", "Import statements matter"
-    };
+            };
     private String currentWord;
     private String scrambledWord;
     private boolean showResult = false;

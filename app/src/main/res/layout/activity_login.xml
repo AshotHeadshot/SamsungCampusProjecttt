@@ -110,4 +110,18 @@
             android:textSize="14sp"/>
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/test_user_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Open the test user account"
+        android:textColor="#FF5C1D"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="24dp"
+        android:clickable="true"
+        android:focusable="true"/>
+
 </LinearLayout>

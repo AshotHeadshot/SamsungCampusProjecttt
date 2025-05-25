@@ -23,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText emailInput, passwordInput;
     private Button loginButton;
     private TextView registerLink;
+    private TextView testUserLink;
     private FirebaseAuth mAuth; // ProgressBar removed, not in new layout
 
     @Override
@@ -36,9 +37,16 @@ public class LoginActivity extends AppCompatActivity {
         passwordInput = findViewById(R.id.password_input);
         loginButton = findViewById(R.id.login_button);
         registerLink = findViewById(R.id.register_link);
+        testUserLink = findViewById(R.id.test_user_link);
 
         loginButton.setOnClickListener(v -> userLogin());
         registerLink.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
+
+        testUserLink.setOnClickListener(v -> {
+            emailInput.setText("individualproject2025@gmail.com");
+            passwordInput.setText("Samsung2025");
+            userLogin();
+        });
     }
 
     private void userLogin() {

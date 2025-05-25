@@ -1,4 +1,4 @@
-package com.example.gamearena;
+// DELETED
 
 import android.content.Context;
 import android.os.Bundle;

@@ -49,12 +49,9 @@ public class ProfileFragment extends Fragment {
 
         SharedPreferences prefs = requireContext().getSharedPreferences("user_prefs", 0);
         String nickname = prefs.getString("nickname", "");
-        int wins = prefs.getInt("wins", 0);
-        int draws = prefs.getInt("draws", 0);
-        int losses = prefs.getInt("losses", 0);
         String avatarUri = prefs.getString("avatarUri", "");
 
-        // Always load avatarUri from Firebase on profile open
+        // Always load stats and avatarUri from Firebase on profile open
         String firebaseUid = null;
         try {
             firebaseUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -116,11 +113,27 @@ public class ProfileFragment extends Fragment {
             avatarImage.setImageResource(R.drawable.ic_profile_default); // fallback to your custom default
         }
 
-        // --- Stats for profile cards ---
-        int gamesPlayed = wins + draws + losses;
-        double winRate = gamesPlayed > 0 ? (wins * 100.0) / gamesPlayed : 0.0;
-        gamesPlayedValue.setText(String.valueOf(gamesPlayed));
-        winRateValue.setText(String.format("%.1f%%", winRate));
+        // --- Load stats from Firebase and update profile cards ---
+        if (firebaseUid != null) {
+            FirebaseDatabase.getInstance().getReference("users").child(firebaseUid).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    int wins = snapshot.child("wins").getValue(Integer.class) != null ? snapshot.child("wins").getValue(Integer.class) : 0;
+                    int draws = snapshot.child("draws").getValue(Integer.class) != null ? snapshot.child("draws").getValue(Integer.class) : 0;
+                    int losses = snapshot.child("losses").getValue(Integer.class) != null ? snapshot.child("losses").getValue(Integer.class) : 0;
+                    int gamesPlayed = wins + draws + losses;
+                    double winRate = gamesPlayed > 0 ? (wins * 100.0) / gamesPlayed : 0.0;
+                    // Update UI
+                    gamesPlayedValue.setText(String.valueOf(gamesPlayed));
+                    winRateValue.setText(String.format("%.1f%%", winRate));
+                    // You can update other stats here as needed
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    // Optionally handle error
+                }
+            });
+        }
         // Always load points from Firebase for profile display
         String pointsUid = null;
         try {
@@ -147,19 +160,6 @@ public class ProfileFragment extends Fragment {
         } else {
             totalPointsValue.setText("0");
         }
-
-        // --- Only sync wins, draws, losses if changed locally ---
-        String syncUid = null;
-        try {
-            syncUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        } catch (Exception e) {}
-        if (syncUid != null) {
-            // Optionally, check if local values differ from Firebase before updating (not shown here)
-            FirebaseDatabase.getInstance().getReference("users").child(syncUid).child("wins").setValue(wins);
-            FirebaseDatabase.getInstance().getReference("users").child(syncUid).child("draws").setValue(draws);
-            FirebaseDatabase.getInstance().getReference("users").child(syncUid).child("losses").setValue(losses);
-        }
-        // Games played and win rate are computed locally and in leaderboard from wins/draws/losses
 
         // --- Real Rank ---
         String tmpUid = null;
@@ -211,10 +211,6 @@ public class ProfileFragment extends Fragment {
         achievementsRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         List<Achievement> achievements = new ArrayList<>();
         // Date formatting removed
-        // First Win Achievement
-        if (wins > 0) {
-            achievements.add(new Achievement("First Win", R.drawable.ic_trophy));
-        }
         // High Score in Snake
         if (snakeBest > 0) {
             achievements.add(new Achievement("High Score in Snake", R.drawable.ic_trophy));
@@ -224,11 +220,41 @@ public class ProfileFragment extends Fragment {
             achievements.add(new Achievement("100 Total Points", R.drawable.ic_trophy));
         }
         // Add more dynamic achievements as desired
-        if (achievements.isEmpty()) {
-            achievements.add(new Achievement("No achievements yet", R.drawable.ic_trophy));
+        // First Win Achievement (load wins from Firebase)
+        String firebaseUidAchievements = null;
+        try {
+            firebaseUidAchievements = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        } catch (Exception e) {}
+        if (firebaseUidAchievements != null) {
+            FirebaseDatabase.getInstance().getReference("users").child(firebaseUidAchievements).child("wins").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    int wins = snapshot.getValue(Integer.class) != null ? snapshot.getValue(Integer.class) : 0;
+                    if (wins > 0) {
+                        achievements.add(new Achievement("First Win", R.drawable.ic_trophy));
+                    }
+                    if (achievements.isEmpty()) {
+                        achievements.add(new Achievement("No achievements yet", R.drawable.ic_trophy));
+                    }
+                    AchievementAdapter achievementAdapter = new AchievementAdapter(getContext(), achievements);
+                    achievementsRecycler.setAdapter(achievementAdapter);
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    if (achievements.isEmpty()) {
+                        achievements.add(new Achievement("No achievements yet", R.drawable.ic_trophy));
+                    }
+                    AchievementAdapter achievementAdapter = new AchievementAdapter(getContext(), achievements);
+                    achievementsRecycler.setAdapter(achievementAdapter);
+                }
+            });
+        } else {
+            if (achievements.isEmpty()) {
+                achievements.add(new Achievement("No achievements yet", R.drawable.ic_trophy));
+            }
+            AchievementAdapter achievementAdapter = new AchievementAdapter(getContext(), achievements);
+            achievementsRecycler.setAdapter(achievementAdapter);
         }
-        AchievementAdapter achievementAdapter = new AchievementAdapter(getContext(), achievements);
-        achievementsRecycler.setAdapter(achievementAdapter);
 
         String uid = null;
         try {
@@ -298,10 +324,7 @@ public class ProfileFragment extends Fragment {
         int imposterPlayed = imposterWins + imposterLosses + imposterDraws;
         int imposterWin = imposterWins;
         // Totals
-        int totalGames = PointManager.getInstance().getWins() + PointManager.getInstance().getLosses() + PointManager.getInstance().getDraws();
-        gamesPlayedValue.setText(String.valueOf(totalGames));
-        winRateValue.setText(String.format("%.1f%%", winRate));
-        totalPointsValue.setText(String.format("%,d", points));
+        // Remove out-of-scope usage of winRate and totalGames here. Achievements and stats are now updated in their respective Firebase callbacks.
         return view;
     }
 
