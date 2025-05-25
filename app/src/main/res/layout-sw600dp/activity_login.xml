@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#181B20"
-    android:padding="32dp">
+    android:padding="64dp">
 
     <!-- Title -->
     <TextView
@@ -17,7 +17,7 @@
         android:textSize="60sp"
         android:textStyle="bold"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp"/>
+        android:layout_marginTop="60dp"/>
 
     <!-- Subtitle -->
     <TextView
@@ -29,7 +29,7 @@
         android:textSize="35sp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="32dp"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="18dp"/>
 
     <!-- Email Label -->
     <TextView
@@ -39,17 +39,17 @@
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         android:textSize="40dp"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="32dp"/>
 
     <!-- Email Input -->
     <EditText
         android:id="@+id/email_input"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
         android:hint="your@email.com"
         android:inputType="textEmailAddress"
         android:textColor="#FFFFFF"
-        android:textSize="35dp"
+        android:textSize="40dp"
         android:textColorHint="#606060"
         android:background="@drawable/edittext_bg"
         android:padding="12dp"
@@ -63,21 +63,21 @@
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         android:textSize="40dp"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="16dp"/>
 
     <!-- Password Input -->
     <EditText
         android:id="@+id/password_input"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
         android:hint="Your password"
         android:inputType="textPassword"
         android:textColor="#FFFFFF"
-        android:textSize="35dp"
+        android:textSize="40dp"
         android:textColorHint="#606060"
         android:background="@drawable/edittext_bg"
         android:padding="12dp"
-        android:layout_marginBottom="24dp"/>
+        android:layout_marginBottom="50dp"/>
 
     <!-- Login Button -->
     <Button
@@ -89,7 +89,7 @@
         android:textColor="#FFFFFF"
         android:backgroundTint="#FF5C1D"
         android:textStyle="bold"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="30dp"/>
 
     <!-- Register Link -->
     <LinearLayout
@@ -103,7 +103,7 @@
             android:layout_height="wrap_content"
             android:text="Don't have an account? "
             android:textColor="#FFFFFF"
-            android:textSize="40sp"/>
+            android:textSize="30sp"/>
 
         <TextView
             android:id="@+id/register_link"
@@ -112,7 +112,7 @@
             android:text="Register"
             android:textColor="#FF5C1D"
             android:textStyle="bold"
-            android:textSize="40sp"/>
+            android:textSize="30sp"/>
     </LinearLayout>
 
 </LinearLayout>

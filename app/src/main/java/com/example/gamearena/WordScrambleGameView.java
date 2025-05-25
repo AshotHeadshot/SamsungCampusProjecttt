@@ -26,8 +26,13 @@ public class WordScrambleGameView extends SurfaceView implements Runnable {
     private android.widget.EditText inputBox;
 
     private String[] wordList = {
+            // Words
             "ANDROID", "KOTLIN", "JAVA", "SURFACE", "BUTTON", "ACTIVITY", "FRAGMENT", "LAYOUT", "WIDGET", "CANVAS",
-            "OBJECT", "STRING", "METHOD", "VARIABLE", "PROJECT", "PACKAGE", "IMPORT", "RETURN", "STATIC", "PUBLIC"
+            "OBJECT", "STRING", "METHOD", "VARIABLE", "PROJECT", "PACKAGE", "IMPORT", "RETURN", "STATIC", "PUBLIC",
+            "MOBILE", "DEVELOPER", "APPLICATION", "RESOURCE", "MANIFEST", "GRADLE", "DEBUG", "RELEASE", "EMULATOR", "DEVICE",
+            // Sentences
+            "Hello World", "Android is awesome", "I love coding", "Java is powerful", "Kotlin is modern",
+            "SurfaceView is cool", "Fragments manage UI", "Layouts define structure", "Debug your code", "Import statements matter"
     };
     private String currentWord;
     private String scrambledWord;
@@ -62,10 +67,30 @@ public class WordScrambleGameView extends SurfaceView implements Runnable {
 
     private void nextWord() {
         currentWord = wordList[random.nextInt(wordList.length)];
-        scrambledWord = scrambleWord(currentWord);
+        if (currentWord.contains(" ")) {
+            scrambledWord = scrambleSentence(currentWord);
+        } else {
+            scrambledWord = scrambleWord(currentWord);
+        }
         showResult = false;
         isCorrect = false;
         userGuess = "";
+    }
+
+    // Scramble a sentence by shuffling the words and also shuffling the letters within each word
+    private String scrambleSentence(String sentence) {
+        String[] words = sentence.split(" ");
+        // Shuffle words
+        List<String> wordList = Arrays.asList(words);
+        Collections.shuffle(wordList);
+        // Shuffle letters in each word
+        for (int i = 0; i < wordList.size(); i++) {
+            String word = wordList.get(i);
+            List<String> letters = Arrays.asList(word.split(""));
+            Collections.shuffle(letters);
+            wordList.set(i, String.join("", letters));
+        }
+        return String.join(" ", wordList);
     }
 
     private String scrambleWord(String word) {
@@ -91,11 +116,16 @@ public class WordScrambleGameView extends SurfaceView implements Runnable {
         canvas.drawColor(Color.rgb(24, 27, 32));
         float centerX = getWidth() / 2f;
         float centerY = getHeight() / 2f;
-        // Draw scrambled word
         textPaint.setTextAlign(Paint.Align.CENTER);
         canvas.drawText("Scrambled:", centerX, centerY - 160, textPaint);
         textPaint.setColor(Color.rgb(255, 140, 0)); // Orange
-        canvas.drawText(scrambledWord, centerX, centerY - 60, textPaint);
+        if (currentWord != null && currentWord.contains(" ")) {
+            // It's a sentence, center it
+            canvas.drawText(scrambledWord, centerX, centerY - 60, textPaint);
+        } else {
+            // Single word
+            canvas.drawText(scrambledWord, centerX, centerY - 60, textPaint);
+        }
         textPaint.setColor(Color.WHITE);
         if (showResult) {
             if (isCorrect) {

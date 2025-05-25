@@ -29,15 +29,15 @@
         android:background="#222"
         android:padding="30dp">
 
-        <Button android:id="@+id/button_00" android:layout_width="200dp" android:layout_height="200dp" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="@color/ga_card_bg" android:layout_margin="5dp"/>
-        <Button android:id="@+id/button_01" android:layout_width="200dp" android:layout_height="200dp" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="@color/ga_card_bg" android:layout_margin="5dp"/>
-        <Button android:id="@+id/button_02" android:layout_width="200dp" android:layout_height="200dp" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="@color/ga_card_bg" android:layout_margin="5dp"/>
-        <Button android:id="@+id/button_10" android:layout_width="200dp" android:layout_height="200dp" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="@color/ga_card_bg" android:layout_margin="5dp"/>
-        <Button android:id="@+id/button_11" android:layout_width="200dp" android:layout_height="200dp" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="@color/ga_card_bg" android:layout_margin="5dp"/>
-        <Button android:id="@+id/button_12" android:layout_width="200dp" android:layout_height="200dp" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="@color/ga_card_bg" android:layout_margin="5dp"/>
-        <Button android:id="@+id/button_20" android:layout_width="200dp" android:layout_height="200dp" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="@color/ga_card_bg" android:layout_margin="5dp"/>
-        <Button android:id="@+id/button_21" android:layout_width="200dp" android:layout_height="200dp" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="@color/ga_card_bg" android:layout_margin="5dp"/>
-        <Button android:id="@+id/button_22" android:layout_width="200dp" android:layout_height="200dp" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="@color/ga_card_bg" android:layout_margin="5dp"/>
+        <Button android:id="@+id/button_00" android:layout_width="200dp" android:layout_height="200dp" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="#42AAFF" android:layout_margin="5dp"/>
+        <Button android:id="@+id/button_01" android:layout_width="200dp" android:layout_height="200dp" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="#42AAFF" android:layout_margin="5dp"/>
+        <Button android:id="@+id/button_02" android:layout_width="200dp" android:layout_height="200dp" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="#42AAFF" android:layout_margin="5dp"/>
+        <Button android:id="@+id/button_10" android:layout_width="200dp" android:layout_height="200dp" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="#42AAFF" android:layout_margin="5dp"/>
+        <Button android:id="@+id/button_11" android:layout_width="200dp" android:layout_height="200dp" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="#42AAFF" android:layout_margin="5dp"/>
+        <Button android:id="@+id/button_12" android:layout_width="200dp" android:layout_height="200dp" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="#42AAFF" android:layout_margin="5dp"/>
+        <Button android:id="@+id/button_20" android:layout_width="200dp" android:layout_height="200dp" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="#42AAFF" android:layout_margin="5dp"/>
+        <Button android:id="@+id/button_21" android:layout_width="200dp" android:layout_height="200dp" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="#42AAFF" android:layout_margin="5dp"/>
+        <Button android:id="@+id/button_22" android:layout_width="200dp" android:layout_height="200dp" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="#42AAFF" android:layout_margin="5dp"/>
     </GridLayout>
 
     <Button

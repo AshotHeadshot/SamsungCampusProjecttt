@@ -37,10 +37,16 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         holder.gamesText.setText(String.valueOf(user.games));
         holder.winRateText.setText(String.format("%.1f%%", user.winRate));
         if (user.avatarUri != null && !user.avatarUri.isEmpty()) {
-            holder.avatarImage.setImageURI(Uri.parse(user.avatarUri));
+            try {
+                holder.avatarImage.setImageURI(Uri.parse(user.avatarUri));
+            } catch (SecurityException | IllegalArgumentException e) {
+                // If access is denied or the URI is invalid, show default avatar
+                holder.avatarImage.setImageResource(R.drawable.ic_profile_default);
+            }
         } else {
             holder.avatarImage.setImageResource(R.drawable.ic_profile_default);
         }
+        // Note: For full access to external images, ensure proper permissions are requested at runtime in your Activity/Fragment.
         // Color code medals
         int color;
         switch (position) {

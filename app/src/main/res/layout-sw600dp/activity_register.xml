@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#181B20"
-    android:layout_gravity="center"
-    android:padding="32dp">
+    android:padding="64dp">
 
     <!-- Title -->
     <TextView
@@ -15,10 +14,10 @@
         android:layout_height="wrap_content"
         android:text="Register for Game Arena"
         android:textColor="#FFFFFF"
-        android:textSize="50sp"
+        android:textSize="60sp"
         android:textStyle="bold"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="32dp"/>
+        android:layout_marginTop="64dp"/>
 
     <!-- Subtitle -->
     <TextView
@@ -27,7 +26,7 @@
         android:layout_height="wrap_content"
         android:text="Create your account to join the arena"
         android:textColor="#B0B0B0"
-        android:textSize="25sp"
+        android:textSize="30sp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="32dp"
         android:layout_marginTop="8dp"/>
@@ -46,7 +45,7 @@
     <EditText
         android:id="@+id/email_input"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="80dp"
         android:hint="your@email.com"
         android:inputType="textEmailAddress"
         android:textColor="#FFFFFF"
@@ -70,7 +69,7 @@
     <EditText
         android:id="@+id/nickname_input"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="80dp"
         android:hint="Your nickname"
         android:inputType="textPersonName"
         android:textColor="#FFFFFF"
@@ -94,7 +93,7 @@
     <EditText
         android:id="@+id/password_input"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="80dp"
         android:hint="Your password"
         android:inputType="textPassword"
         android:textColor="#FFFFFF"
@@ -118,7 +117,7 @@
     <EditText
         android:id="@+id/confirm_password_input"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="80dp"
         android:textSize="40dp"
         android:hint="Repeat your password"
         android:inputType="textPassword"
@@ -126,18 +125,18 @@
         android:textColorHint="#606060"
         android:background="@drawable/edittext_bg"
         android:padding="12dp"
-        android:layout_marginBottom="24dp"/>
+        android:layout_marginBottom="48dp"/>
 
     <!-- Register Button -->
     <Button
         android:id="@+id/register_button"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="90dp"
         android:text="Register"
         android:textColor="#FFFFFF"
         android:backgroundTint="#FF5C1D"
         android:textStyle="bold"
-        android:textSize="40dp"
+        android:textSize="35dp"
         android:layout_marginBottom="16dp"/>
 
     <!-- Login Link -->
@@ -152,7 +151,7 @@
             android:layout_height="wrap_content"
             android:text="Already have an account? "
             android:textColor="#FFFFFF"
-            android:textSize="40dp"/>
+            android:textSize="30dp"/>
 
         <TextView
             android:id="@+id/login_link"
@@ -161,7 +160,7 @@
             android:text="Login"
             android:textColor="#FF5C1D"
             android:textStyle="bold"
-            android:textSize="40dp"/>
+            android:textSize="30dp"/>
     </LinearLayout>
 
 </LinearLayout>

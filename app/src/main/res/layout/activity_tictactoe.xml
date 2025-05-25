@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="24dp"
-    android:gravity="center_horizontal"
+    android:gravity="center"
     android:background="#181B20">
 
     <TextView
@@ -29,15 +29,15 @@
         android:background="#222"
         android:padding="8dp">
 
-        <Button android:id="@+id/button_00" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="@color/ga_card_bg" android:layout_margin="5dp"/>
-        <Button android:id="@+id/button_01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="@color/ga_card_bg" android:layout_margin="5dp"/>
-        <Button android:id="@+id/button_02" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="@color/ga_card_bg" android:layout_margin="5dp"/>
-        <Button android:id="@+id/button_10" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="@color/ga_card_bg" android:layout_margin="5dp"/>
-        <Button android:id="@+id/button_11" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="@color/ga_card_bg" android:layout_margin="5dp"/>
-        <Button android:id="@+id/button_12" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="@color/ga_card_bg" android:layout_margin="5dp"/>
-        <Button android:id="@+id/button_20" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="@color/ga_card_bg" android:layout_margin="5dp"/>
-        <Button android:id="@+id/button_21" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="@color/ga_card_bg" android:layout_margin="5dp"/>
-        <Button android:id="@+id/button_22" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="@color/ga_card_bg" android:layout_margin="5dp"/>
+        <Button android:id="@+id/button_00" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="#42AAFF" android:layout_margin="5dp"/>
+        <Button android:id="@+id/button_01" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="#42AAFF" android:layout_margin="5dp"/>
+        <Button android:id="@+id/button_02" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="#42AAFF" android:layout_margin="5dp"/>
+        <Button android:id="@+id/button_10" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="#42AAFF" android:layout_margin="5dp"/>
+        <Button android:id="@+id/button_11" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="#42AAFF" android:layout_margin="5dp"/>
+        <Button android:id="@+id/button_12" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="#42AAFF" android:layout_margin="5dp"/>
+        <Button android:id="@+id/button_20" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="#42AAFF" android:layout_margin="5dp"/>
+        <Button android:id="@+id/button_21" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="#42AAFF" android:layout_margin="5dp"/>
+        <Button android:id="@+id/button_22" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="@android:dimen/app_icon_size" android:textColor="#fff" android:backgroundTint="#42AAFF" android:layout_margin="5dp"/>
     </GridLayout>
 
     <Button

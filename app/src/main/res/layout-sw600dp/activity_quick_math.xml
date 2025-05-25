@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="24dp"
+    android:padding="48dp"
     android:background="#181B20">
 
     <!-- Timer at top right -->
@@ -47,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="3 × 9"
-            android:textSize="100sp"
+            android:textSize="80sp"
             android:textColor="@android:color/white"
             android:gravity="center"/>
     </androidx.cardview.widget.CardView>
@@ -62,7 +62,7 @@
         android:alignmentMode="alignMargins"
         android:rowOrderPreserved="false"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="16dp">
+        android:layout_marginBottom="32dp">
         <androidx.cardview.widget.CardView
             android:id="@+id/answerCard1"
             android:layout_width="0dp"
@@ -78,7 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="25"
-                android:textSize="70sp"
+                android:textSize="50sp"
                 android:textColor="@android:color/white"
                 android:background="@android:color/transparent"/>
         </androidx.cardview.widget.CardView>
@@ -97,7 +97,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="26"
-                android:textSize="70sp"
+                android:textSize="50sp"
                 android:textColor="@android:color/white"
                 android:background="@android:color/transparent"/>
         </androidx.cardview.widget.CardView>
@@ -116,7 +116,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="27"
-                android:textSize="70sp"
+                android:textSize="50sp"
                 android:textColor="@android:color/white"
                 android:background="@android:color/transparent"/>
         </androidx.cardview.widget.CardView>
@@ -135,7 +135,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="28"
-                android:textSize="70sp"
+                android:textSize="50sp"
                 android:textColor="@android:color/white"
                 android:background="@android:color/transparent"/>
         </androidx.cardview.widget.CardView>

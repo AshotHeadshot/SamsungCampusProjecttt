@@ -33,9 +33,7 @@ public class UnrankedGamesFragment extends Fragment {
         games.add(new Game(R.drawable.word_scramble_logo, "Word Scramble", "Unscramble words as fast as you can.", () -> {
             startActivity(new Intent(getActivity(), WordScrambleActivity.class));
         }));
-        games.add(new Game(R.drawable.alias_logo, "Alias", "Describe and guess words for points.", () -> {
-            startActivity(new Intent(getActivity(), AliasActivity.class));
-        }));
+
         games.add(new Game(R.drawable.fast_typing_logo, "Fast Typing Challenge", "Type words quickly and accurately.", () -> {
             startActivity(new Intent(getActivity(), FastTypingActivity.class));
         }));

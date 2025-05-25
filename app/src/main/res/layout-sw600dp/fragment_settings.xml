@@ -23,7 +23,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/white"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="32dp"
                 style="@style/GameArenaHeading"/>
 
             <!-- Edit Profile Section -->
@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:text="Edit Profile"
                 android:textStyle="bold"
-                android:textSize="40sp"
+                android:textSize="60sp"
                 android:paddingTop="16dp"
                 android:paddingBottom="8dp"
                 android:textColor="#FF6A36"/>
@@ -42,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Edit Nickname"
-                android:textSize="30dp"
+                android:textSize="40dp"
                 android:textColorHint="@color/white"
                 android:textColor="@color/white"
                 android:inputType="textPersonName"/>
@@ -51,8 +51,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Save Nickname"
-                android:layout_marginTop="16dp"
-                android:textSize="30dp"
+                android:layout_marginTop="32dp"
+                android:textSize="35dp"
                 android:textColor="@color/white"
                 android:backgroundTint="#5396FF"/>
             <Button
@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:text="Delete Avatar"
                 android:layout_marginTop="16dp"
-                android:textSize="30dp"
+                android:textSize="35dp"
                 android:textColor="@android:color/white"
                 android:backgroundTint="#5396FF"/>
 
@@ -72,8 +72,8 @@
                 android:layout_height="wrap_content"
                 android:text="Manage Account"
                 android:textStyle="bold"
-                android:textSize="40sp"
-                android:paddingTop="16dp"
+                android:textSize="60sp"
+                android:paddingTop="32dp"
                 android:paddingBottom="8dp"
                 android:textColor="#FF6A36"/>
             <Button
@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:text="Logout"
                 android:layout_marginTop="16dp"
-                android:textSize="30dp"
+                android:textSize="35dp"
                 android:textColor="@android:color/white"
                 android:backgroundTint="#5396FF"/>
 
@@ -91,7 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Delete Account"
-                android:textSize="30dp"
+                android:textSize="35dp"
                 android:layout_marginTop="16dp"
                 android:backgroundTint="#5396FF"
                 android:textColor="@android:color/white"/>

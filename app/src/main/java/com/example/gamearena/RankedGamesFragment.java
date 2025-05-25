@@ -25,7 +25,7 @@ public class RankedGamesFragment extends Fragment {
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2)); // 2 columns
 
         List<Game> games = new ArrayList<>();
-        games.add(new Game(R.drawable.rock_paper_scissors_vs_bot, "Rock-Paper-Scissors vs Bot", "Play classic Rock-Paper-Scissors against AI.", () -> {
+        games.add(new Game(R.drawable.rock_paper_scissors_vs_bot, "Rock Paper Scissors", "Play classic Rock Paper Scissors against AI.", () -> {
             startActivity(new Intent(getActivity(), RockPaperScissorsActivity.class));
         }));
         games.add(new Game(R.drawable.quick_math_challenge_logo, "Quick Math Challenge", "Solve math problems quickly for points.", () -> {

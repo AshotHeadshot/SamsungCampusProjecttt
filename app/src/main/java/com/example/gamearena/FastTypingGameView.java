@@ -72,6 +72,7 @@ public class FastTypingGameView extends SurfaceView implements Runnable {
         paint.setAntiAlias(true);
         paint.setColor(Color.WHITE);
         paint.setTextSize(60);
+        paint.setTextAlign(Paint.Align.CENTER); // Center all text
         float centerX = getWidth() / 2f;
         float centerY = getHeight() / 2f;
         canvas.drawText("Type this:", centerX, centerY - 120, paint);
@@ -94,6 +95,7 @@ public class FastTypingGameView extends SurfaceView implements Runnable {
             paint.setTextSize(40);
             canvas.drawText("Time left: " + (timeLeft / 1000.0) + "s", centerX, centerY + 100, paint);
         }
+        paint.setTextAlign(Paint.Align.LEFT); // Reset to default if needed elsewhere
     }
 
     @Override

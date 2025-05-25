@@ -41,8 +41,8 @@
 
     <GridLayout
         android:id="@+id/snakeGrid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
         android:rowCount="15"
         android:columnCount="15"
         android:background="@color/ga_card_bg"
